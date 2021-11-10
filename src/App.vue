@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    testtesttest
     <nav-bar></nav-bar>
   </div>
 </template>

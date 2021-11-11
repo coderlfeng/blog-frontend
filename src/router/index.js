@@ -1,21 +1,22 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import lifeng_routes from "./lifeng/index"
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
-]
+  {
+    path: "/",
+    redirect: "/lifeng",
+    component: () => import('@/views/home/index.vue'),
+    children: [
+      ...lifeng_routes
+    ],
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

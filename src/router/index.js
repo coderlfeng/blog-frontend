@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import lifeng_routes from "./lifeng/index"
+import module_routes from "./module/index"
+import useridIns from "@/utils/userid"
 
 Vue.use(VueRouter);
 
@@ -8,15 +9,49 @@ const routes = [
   {
     path: "/",
     redirect: "/lifeng",
-    component: () => import('@/views/home/index.vue'),
+    component: () => import('@/views/layout/index.vue'),
     children: [
-      ...lifeng_routes
+      {
+        path: "lifeng",
+        name: "lifeng",
+        redirect: "lifeng/home",
+        component: () => import('@/views/layout/index.vue'),
+        children: [
+          ...module_routes
+        ],
+      },
+      {
+        path: "liuhuan",
+        name: "liuhuan",
+        redirect: "liuhuan/home",
+        component: () => import('@/views/layout/index.vue'),
+        children: [
+          ...module_routes
+        ],
+      },
+      {
+        path: "dengyu",
+        name: "dengyu",
+        redirect: "dengyu/home",
+        component: () => import('@/views/layout/index.vue'),
+        children: [
+          ...module_routes
+        ],
+      }
     ],
   },
+  
 ];
 
 const router = new VueRouter({
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  const newUser = to.path.split('/')[1]
+  const oldUser = from.path.split('/')[1]
+  newUser !== oldUser && useridIns.setByPath(to.path)
+  next()
+})
 
 export default router;

@@ -6,17 +6,17 @@
 </template>
 
 <script>
-import home from "@/views/home/index.vue"
+import home from "@/views/home/index.vue";
 export default {
   components: {
-    home
+    home,
   },
   methods: {
     scrollHandle(e) {
-      console.log(e)
-    }
-  }
-}
+      console.log(e);
+    },
+  },
+};
 </script>
 <style lang="less">
 #app {

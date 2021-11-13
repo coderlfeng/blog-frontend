@@ -1,17 +1,25 @@
 <template>
-  <div id="app">
-    testtesttest
-    <nav-bar></nav-bar>
+  <div id="app" @scroll="scrollHandle">
+    <!-- <home /> -->
+    <router-view />
   </div>
 </template>
+
 <script>
-import navBar from "@/components/navbar/index.vue"
+import home from "@/views/home/index.vue";
 export default {
   components: {
-    navBar
-  }
-}
+    home,
+  },
+  methods: {
+    scrollHandle(e) {
+      console.log(e);
+    },
+  },
+};
 </script>
 <style lang="less">
-
+#app {
+  height: 100vh;
+}
 </style>

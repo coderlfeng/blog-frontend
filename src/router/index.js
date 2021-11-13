@@ -1,21 +1,57 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import module_routes from "./module/index"
+import useridIns from "@/utils/userid"
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
-]
+  {
+    path: "/",
+    redirect: "/lifeng",
+    component: () => import('@/views/layout/index.vue'),
+    children: [
+      {
+        path: "lifeng",
+        name: "lifeng",
+        redirect: "lifeng/home",
+        component: () => import('@/views/layout/index.vue'),
+        children: [
+          ...module_routes
+        ],
+      },
+      {
+        path: "liuhuan",
+        name: "liuhuan",
+        redirect: "liuhuan/home",
+        component: () => import('@/views/layout/index.vue'),
+        children: [
+          ...module_routes
+        ],
+      },
+      {
+        path: "dengyu",
+        name: "dengyu",
+        redirect: "dengyu/home",
+        component: () => import('@/views/layout/index.vue'),
+        children: [
+          ...module_routes
+        ],
+      }
+    ],
+  },
+  
+];
 
 const router = new VueRouter({
-  routes
+  routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const newUser = to.path.split('/')[1]
+  const oldUser = from.path.split('/')[1]
+  newUser !== oldUser && useridIns.setByPath(to.path)
+  next()
 })
 
-export default router
+export default router;

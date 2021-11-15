@@ -1,11 +1,11 @@
 <template>
   <section class="showcase" :style="bgImg">
     <div class="blogInfo">
-      <div class="avatar-container">
+      <div class="avatar-container flex justify-center">
         <img :src="blogInfo.avatar" alt="" />
       </div>
-      <p class="name">{{ blogInfo.name }}</p>
-      <p class="conciseDesc">{{ blogInfo.conciseDesc }}</p>
+      <p class="py-2 text-base md:text-3xl">{{ blogInfo.name }}</p>
+      <p class="text-base md:text-2xl">{{ blogInfo.conciseDesc }}</p>
     </div>
     <img
       src="@/assets/images/home-down.png"
@@ -59,12 +59,11 @@ export default {
   .blogInfo {
     text-align: center;
     position: absolute;
-    bottom: 0px;
-    height: 30%;
+    bottom: 0;
+    padding-bottom: 100px;
     width: 100%;
     backdrop-filter: blur(2px);
     .avatar-container {
-      text-align: center;
       img {
         width: 60px;
         height: 60px;
@@ -73,7 +72,7 @@ export default {
       }
     }
     .name {
-      padding: 5px 0;
+      padding: 25px 0;
       font-family: 'Microsoft Yahei', Courier, monospace;
     }
   }

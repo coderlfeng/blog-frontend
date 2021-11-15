@@ -1,18 +1,28 @@
 <template>
   <div class="home">
     <showCase @slideToHome="slideToHome" />
-    <section class="home-main">溜了溜了</section>
+    <section class="home-main">
+      <nav-bar />
+      <articles />
+      <album />
+    </section>
   </div>
 </template>
 
 <script>
 import showCase from "@/components/showcase/index";
+import articles from "./components/article/index.vue";
+import album from "./components/album/index.vue"
+import navBar from "@/components/navbar/index.vue"
 import useridIns from "@/utils/userid";
 
 export default {
   name: "home",
   components: {
     showCase,
+    articles,
+    album,
+    navBar
   },
   data() {
     return {
@@ -40,7 +50,7 @@ export default {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   .home-main {
-    height: 1000px;
+    // height: 1000px;
     scroll-snap-align: start;
   }
 }

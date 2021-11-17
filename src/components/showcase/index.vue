@@ -2,10 +2,10 @@
   <section class="showcase" :style="bgImg">
     <div class="blogInfo">
       <div class="avatar-container flex justify-center">
-        <img :src="blogInfo.avatar" alt="" />
+        <img :src="blogInfo.avatar" alt="" class="w-12 h-12 md:w-5 md:h-5"/>
       </div>
-      <p class="py-2 text-base md:text-3xl">{{ blogInfo.name }}</p>
-      <p class="text-base md:text-2xl">{{ blogInfo.conciseDesc }}</p>
+      <p class="py-6 md:py-2 text-4xl md:text-tiny">{{ blogInfo.name }}</p>
+      <p class="text-3xl md:text-tiny">{{ blogInfo.conciseDesc }}</p>
     </div>
     <img
       src="@/assets/images/home-down.png"
@@ -19,6 +19,7 @@
 import useridInfo from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
 export default {
+  name: 'showcase',
   data() {
     return {
       bgImg: {
@@ -39,7 +40,10 @@ export default {
   },
   methods: {
     slideToHome() {
-      this.$emit("slideToHome");
+      // this.$emit("slideToHome");
+      this.$router.push({
+        path: '/lifeng/home'
+      })
     },
     async getBlogInfo() {
       const userid = useridInfo.getUserId();
@@ -65,10 +69,9 @@ export default {
     backdrop-filter: blur(2px);
     .avatar-container {
       img {
-        width: 60px;
-        height: 60px;
+        // width: 60px;
+        // height: 60px;
         border-radius: 50%;
-        margin: 5px 0;
       }
     }
     .name {
@@ -80,6 +83,7 @@ export default {
     position: absolute;
     bottom: 30px;
     left: 50%;
+    display: inline-block;
     width: 35px;
     height: 35px;
     transform: translateX(-50%);

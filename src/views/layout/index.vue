@@ -1,15 +1,16 @@
 <template>
-    <div>
-        <router-view />
-    </div>
+  <div class="layout">
+    <router-view />
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {};
 </script>
 
 <style lang="less" scoped>
-
+.layout {
+  width: 100vw;
+  height: 100vh;
+}
 </style>

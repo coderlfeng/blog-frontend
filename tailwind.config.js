@@ -2,13 +2,54 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontSize: {
+      xs: ".75rem",
+      sm: ".875rem",
+      tiny: ".875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "4rem",
+      "7xl": "5rem",
+    },
+    width: {
+      0: "0px",
+      1: "0.5rem",
+      2: "1rem",
+      3: "1.5rem",
+      4: "2rem",
+      5: "2.5rem",
+      6: "3rem",
+      7: "3.5rem",
+      8: "4rem",
+      9: "4.5rem",
+      10: "5rem",
+      11: "5.5rem",
+      12: "6rem"
+    },
+    height: {
+      0: "0px",
+      1: "0.5rem",
+      2: "1rem",
+      3: "1.5rem",
+      4: "2rem",
+      5: "2.5rem",
+      6: "3rem",
+      7: "3.5rem",
+      8: "4rem",
+      9: "4.5rem",
+      10: "5rem",
+      11: "5.5rem",
+      12: "6rem"
+    },
     extend: {},
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    require('tailwindcss'),
-    require('autoprefixer'),
-  ],
-}
+  plugins: [require("tailwindcss"), require("autoprefixer")],
+};

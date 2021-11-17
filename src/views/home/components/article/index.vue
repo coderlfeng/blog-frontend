@@ -5,10 +5,9 @@
       <li v-for="article in articles" :key="article.article_id" class="flex py-1">
         <img :src="article.coverUrl" referrerpolicy="no-referrer" class="articleCover">
         <div class="articleInfo">
-            <div class="text-sm">{{ article.title }}</div>
-            <div class="text-sm">{{ article.subTitle }}</div>
+            <div class="text-base lg:text-xs">{{ article.title }}</div>
+            <div class="text-xs">{{ article.subTitle }}</div>
         </div>
-        <!-- <div>{{article.createTime}}</div> -->
       </li>
     </ul>
   </div>

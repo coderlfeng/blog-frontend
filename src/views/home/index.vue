@@ -1,11 +1,8 @@
 <template>
   <div class="home">
-    <showCase @slideToHome="slideToHome" />
-    <section class="home-main">
-      <nav-bar />
+      <nav-bar :avatar="blogInfo.avatar"/>
       <articles />
       <album />
-    </section>
   </div>
 </template>
 
@@ -15,6 +12,7 @@ import articles from "./components/article/index.vue";
 import album from "./components/album/index.vue"
 import navBar from "@/components/navbar/index.vue"
 import useridIns from "@/utils/userid";
+import { getBlogInfo } from "@/api/modules/home";
 
 export default {
   name: "home",
@@ -30,15 +28,18 @@ export default {
         backgroundImage: "url(" + require("@/assets/images/home.jpg") + ")",
         backgroundPosition: "center",
       },
+      blogInfo: {}
     };
   },
-  created() {},
+  created() {
+    this.getBlogInfo()
+  },
 
   methods: {
-    slideToHome() {
-      this.$el
-        .querySelector(".home-main")
-        .scrollIntoView({ block: "start", behavior: "smooth" });
+    async getBlogInfo() {
+      const userid = useridIns.getUserId();
+      const res = await getBlogInfo({ id: userid });
+      this.blogInfo = res.data;
     },
   },
 };
@@ -48,10 +49,8 @@ export default {
 .home {
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
   .home-main {
-    // height: 1000px;
-    scroll-snap-align: start;
+    
   }
 }
 </style>

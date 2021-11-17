@@ -8,13 +8,13 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/lifeng",
+    redirect: "lifeng",
     component: () => import('@/views/layout/index.vue'),
     children: [
       {
         path: "lifeng",
         name: "lifeng",
-        redirect: "lifeng/home",
+        redirect: "lifeng/showcase",
         component: () => import('@/views/layout/index.vue'),
         children: [
           ...module_routes
@@ -23,7 +23,7 @@ const routes = [
       {
         path: "liuhuan",
         name: "liuhuan",
-        redirect: "liuhuan/home",
+        redirect: "liuhuan/showcase",
         component: () => import('@/views/layout/index.vue'),
         children: [
           ...module_routes
@@ -32,7 +32,7 @@ const routes = [
       {
         path: "dengyu",
         name: "dengyu",
-        redirect: "dengyu/home",
+        redirect: "dengyu/showcase",
         component: () => import('@/views/layout/index.vue'),
         children: [
           ...module_routes

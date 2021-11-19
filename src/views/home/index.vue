@@ -1,16 +1,18 @@
 <template>
   <div class="home">
-      <nav-bar :avatar="blogInfo.avatar"/>
+    <div class="home-main">
+      <nav-bar :avatar="blogInfo.avatar" :concise-desc="blogInfo.conciseDesc" />
       <articles />
       <album />
+    </div>
   </div>
 </template>
 
 <script>
 import showCase from "@/components/showcase/index";
 import articles from "./components/article/index.vue";
-import album from "./components/album/index.vue"
-import navBar from "@/components/navbar/index.vue"
+import album from "./components/album/index.vue";
+import navBar from "@/components/navbar/index.vue";
 import useridIns from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
 
@@ -20,7 +22,7 @@ export default {
     showCase,
     articles,
     album,
-    navBar
+    navBar,
   },
   data() {
     return {
@@ -28,11 +30,11 @@ export default {
         backgroundImage: "url(" + require("@/assets/images/home.jpg") + ")",
         backgroundPosition: "center",
       },
-      blogInfo: {}
+      blogInfo: {},
     };
   },
   created() {
-    this.getBlogInfo()
+    this.getBlogInfo();
   },
 
   methods: {
@@ -49,8 +51,16 @@ export default {
 .home {
   height: 100vh;
   overflow-y: scroll;
-  .home-main {
-    
+  background: url("../../assets/images/m-bg1.jpg") no-repeat;
+  background-size: cover;
+  @media only screen and (min-width: 1000px) {
+    padding: 0 10%;
+    box-sizing: border-box;
+    background: url("../../assets/images/home.jpg") no-repeat;
+    .home-main {
+      backdrop-filter: blur(6px);
+      box-shadow: 15px 0 20px -1px rgba(255,255,255,.3), -15px 0 20px -1px rgba(255,255,255,.3);
+    }
   }
 }
 </style>

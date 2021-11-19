@@ -1,12 +1,12 @@
 <template>
-  <div class="home-article">
-    <h2>最近文章</h2>
+  <div class="home-article px-2">
+    <p class="text-base py-2">最近文章</p>
     <ul>
       <li v-for="article in articles" :key="article.article_id" class="flex py-1">
-        <img :src="article.coverUrl" referrerpolicy="no-referrer" class="articleCover">
+        <img :src="article.coverUrl" referrerpolicy="no-referrer" class="articleCover w-20 h-20 lg:w-7 lg:h-7 mr-1 rounded">
         <div class="articleInfo">
-            <div class="text-base lg:text-xs">{{ article.title }}</div>
-            <div class="text-xs">{{ article.subTitle }}</div>
+            <div class="text-xl lg:text-base">{{ article.title }}</div>
+            <div class="text-base lg:text-tiny">{{ article.subTitle }}</div>
         </div>
       </li>
     </ul>
@@ -45,8 +45,6 @@ export default {
 .home-article {
     .articleCover {
         display: inline-block;
-        width: 100px;
-        height: 100px;
         object-fit: contain;
     }
 }

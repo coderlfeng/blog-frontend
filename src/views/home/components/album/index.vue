@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-base py-2 font-bold font-mono">
         相册
     </div>
 </template>

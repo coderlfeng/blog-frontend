@@ -1,13 +1,36 @@
 <template>
   <div class="home-article px-2">
-    <p class="text-base py-2">最近文章</p>
+    <p class="text-base py-2 font-bold font-mono">最近文章</p>
     <ul>
-      <li v-for="article in articles" :key="article.article_id" class="flex py-1">
-        <img :src="article.coverUrl" referrerpolicy="no-referrer" class="articleCover w-20 h-20 lg:w-7 lg:h-7 mr-1 rounded">
-        <div class="articleInfo">
-            <div class="text-xl lg:text-base">{{ article.title }}</div>
-            <div class="text-base lg:text-tiny">{{ article.subTitle }}</div>
+      <li
+        v-for="article in articles"
+        :key="article.article_id"
+        class="flex py-1"
+      >
+        <img
+          :src="article.coverUrl"
+          referrerpolicy="no-referrer"
+          class="articleCover w-20 h-20 lg:w-7 lg:h-7 mr-3 rounded"
+        />
+        <div class="articleInfo flex-1">
+          <div class="text-xl lg:text-base mb-3 font-mono font-bold">{{ article.title }}</div>
+          <div class="text-base lg:text-tiny leading-normal font-sans">
+            {{ article.subTitle }}
+          </div>
         </div>
+        <ul class="flex flex-col justify-center items-center w-10 msm:hidden lg:flex">
+          <li
+            v-for="(tag, index) in article.tags"
+            :key="tag.tagId"
+            class="article-tag rounded text-center leading-normal w-6 text-tiny"
+            :style="{
+              backgroundColor: `rgba(${colorEnum[index].bg})`,
+              color: colorEnum[index].color,
+            }"
+          >
+            {{ tag.tagName }}
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -20,6 +43,11 @@ export default {
   data() {
     return {
       articles: [],
+      colorEnum: [
+        { bg: "255, 107, 129, 0.3", color: "#fff" },
+        { bg: "123, 237, 159, 0.3", color: "#fff" },
+        { bg: "83, 82, 237, 0.3", color: "#fff" },
+      ],
     };
   },
   created() {
@@ -43,9 +71,20 @@ export default {
 
 <style lang="less" scoped>
 .home-article {
-    .articleCover {
-        display: inline-block;
-        object-fit: contain;
+  .section-title {
+    font-family: "微软雅黑";
+  }
+  .articleCover {
+    display: inline-block;
+    object-fit: contain;
+  }
+  .article-tag {
+    margin: 0.3rem 0;
+  }
+  @media screen and (min-width: 1000px) {
+    .article-tag {
+      margin: 0.11rem 0;
     }
+  }
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="home-article px-2">
     <p class="text-base py-2">最近文章</p>
     <ul>
-      <li v-for="article in articles" :key="article.article_id" class="flex py-1">
+      <li v-for="article in articles" :key="article.article_id" class="flex py-1" @click="goToDetail(article.article_id)">
         <img :src="article.coverUrl" referrerpolicy="no-referrer" class="articleCover w-20 h-20 lg:w-7 lg:h-7 mr-1 rounded">
         <div class="articleInfo">
             <div class="text-xl lg:text-base">{{ article.title }}</div>
@@ -33,10 +33,19 @@ export default {
         page: 1,
         limit: 10,
         articleTitle: "",
-        sortType: 2,
+        sortType: 1,
       });
       this.articles = res.data.records;
     },
+    goToDetail(id) {
+      console.log(id)
+      this.$router.push({
+        path: `article`,
+        query: {
+          id
+        }
+      })
+    }
   },
 };
 </script>

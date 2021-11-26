@@ -1,10 +1,10 @@
 <template>
-  <div class="home" @click="hideMenu" @scroll="hideMenu">
-    <!-- <div class="home-main"> -->
+  <div class="home box-border" @click="hideMenu" @scroll="hideMenu">
+    <div class="home-main">
       <nav-bar :avatar="blogInfo.avatar" :concise-desc="blogInfo.conciseDesc" ref="navbar" />
       <articles />
       <album />
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
       this.blogInfo = res.data;
     },
     hideMenu() {
-      this.$refs['navbar'].hideMenu()
+      this.$refs.navbar.hideMenu()
     }
   },
 };
@@ -54,14 +54,20 @@ export default {
 .home {
   height: 100vh;
   overflow-y: scroll;
-  background: url("../../assets/images/m-bg1.jpg") no-repeat;
+  background: url("../../assets/images/bg1.jpg") no-repeat;
   background-size: cover;
+  background-position: center;
+  @media only screen and (max-width: 1000px) {
+    .home-main {
+      backdrop-filter: blur(1px);
+    }
+  }
   @media only screen and (min-width: 1000px) {
     padding: 0 10%;
     box-sizing: border-box;
-    background: url("../../assets/images/home.jpg") no-repeat;
+    background: url("../../assets/images/bg1.jpg") no-repeat;
     .home-main {
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(20px);
       box-shadow: 15px 0 20px -1px rgba(255,255,255,.3), -15px 0 20px -1px rgba(255,255,255,.3);
     }
   }

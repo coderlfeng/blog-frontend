@@ -1,8 +1,5 @@
 <template>
-  <div id="app" @scroll="scrollHandle">
-    <!-- <home /> -->
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script>
@@ -11,15 +8,11 @@ export default {
   components: {
     home,
   },
-  methods: {
-    scrollHandle(e) {
-      console.log(e);
-    },
-  },
 };
 </script>
 <style lang="less">
 #app {
   height: 100vh;
+  width: 100vw;
 }
 </style>

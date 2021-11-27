@@ -59,7 +59,7 @@ export default {
   @media only screen and (min-width: 1000px) {
     padding: 0 10%;
     box-sizing: border-box;
-    background: url("../../assets/images/home.jpg") no-repeat;
+    background: url("../../assets/images/home.jpg") center center no-repeat;
     .home-main {
       backdrop-filter: blur(6px);
       box-shadow: 15px 0 20px -1px rgba(255,255,255,.3), -15px 0 20px -1px rgba(255,255,255,.3);

@@ -9,6 +9,7 @@
       px-4
       py-1
       lg:py-0
+      font-mono
       navbar
     "
   >
@@ -19,6 +20,7 @@
       />
       <span class="lg:text-base">{{ conciseDesc }}</span>
     </div>
+    <search-input />
     <ul class="flex msm:hidden lg:flex">
       <li class="text-base ml-4">文章</li>
       <li class="text-base ml-4">相册</li>
@@ -57,8 +59,12 @@
 </template>
 
 <script>
+import searchInput from "@/components/search-input/index.vue"
 export default {
   props: ["avatar", "conciseDesc"],
+  components: {
+    searchInput
+  },
   data() {
     return {
       showMenu: false,

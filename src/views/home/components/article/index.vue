@@ -5,7 +5,7 @@
       <li
         v-for="article in articles"
         :key="article.article_id"
-        class="flex py-1"
+        class="flex py-1 article"
       >
         <img
           :src="article.coverUrl"
@@ -13,12 +13,23 @@
           class="articleCover w-20 h-20 lg:w-7 lg:h-7 mr-3 rounded"
         />
         <div class="articleInfo flex-1">
-          <div class="text-xl lg:text-base mb-3 font-mono font-bold">{{ article.title }}</div>
+          <div class="text-xl lg:text-base mb-3 font-mono font-bold">
+            {{ article.title }}
+          </div>
           <div class="text-base lg:text-tiny leading-normal font-sans">
             {{ article.subTitle }}
           </div>
         </div>
-        <ul class="flex flex-col justify-center items-center w-10 msm:hidden lg:flex">
+        <ul
+          class="
+            flex flex-col
+            justify-center
+            items-center
+            w-10
+            msm:hidden
+            lg:flex
+          "
+        >
           <li
             v-for="(tag, index) in article.tags"
             :key="tag.tagId"
@@ -77,6 +88,13 @@ export default {
   .articleCover {
     display: inline-block;
     object-fit: contain;
+  }
+  .article {
+    cursor: pointer;
+    transition: all .5s;
+    &:hover {
+      backdrop-filter: blur(4px);
+    }
   }
   .article-tag {
     margin: 0.3rem 0;

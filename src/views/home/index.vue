@@ -4,7 +4,6 @@
       <nav-bar :avatar="blogInfo.avatar" :concise-desc="blogInfo.conciseDesc" ref="navbar" />
       <articles />
       <album />
-      <!-- <album-item/> -->
     </div>
   </div>
 </template>
@@ -47,7 +46,7 @@ export default {
       this.blogInfo = res.data;
     },
     hideMenu() {
-      this.$refs.navbar.hideMenu()
+      this.$refs.navbar && this.$refs.navbar.hideMenu()
     }
   },
 };

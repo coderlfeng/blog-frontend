@@ -4,17 +4,7 @@
       相册
     </p>
     <ul class="flex flex-wrap justify-around">
-      <li v-for="(album, index) in albums" :key="album.id" class="mb-3 album">
-        <!-- <div class="album-container relative">
-          <img
-            :src="album.albumCover"
-            :alt="album.albumName"
-            class="album-img"
-            :class="{open: index === openIndex}"
-            @click="open(index)"
-          />
-          <p class="album-name text-center">{{ album.albumName }}</p>
-        </div> -->
+      <li v-for="(album) in albums" :key="album.id" class="mb-3 album">
         <album-item :album="album"/>
       </li>
     </ul>
@@ -33,21 +23,24 @@ export default {
   data() {
     return {
       albums: [],
-      openIndex: null
+      openIndex: null,
+      isSmallScreen: false,
     };
   },
   created() {
+    this.getWidth()
     this.getAlbums();
   },
   methods: {
     async getAlbums() {
       const bloggerId = useridIns.getUserId();
-      const res = await getBloggerAlbum({ bloggerId });
+      const res = await getBloggerAlbum({ bloggerId, sort: 2, page: 1, size: this.isSmallScreen ? 4 : 10 });
       this.albums = res.data.records;
     },
-    open(i) {
-        this.openIndex = i
-    }
+    getWidth() {
+      const deviceWidth = screen.availWidth;
+      this.isSmallScreen = deviceWidth > 800 ? false : true;
+    },
   },
 };
 </script>

@@ -17,6 +17,18 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "article" */ "@/views/article/index.vue"),
   },
+  {
+    path: "album",
+    name: "album",
+    component: () =>
+      import(/* webpackChunkName: "album" */ "@/views/album/index.vue"),
+  },
+  {
+    path: "allarticle",
+    name: "allarticle",
+    component: () =>
+      import(/* webpackChunkName: "album" */ "@/views/allArticle/index.vue"),
+  },
 ];
 
 module.exports = routes;

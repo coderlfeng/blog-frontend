@@ -20,7 +20,7 @@
         <span class="lg:text-base" :style="{color: '#000'}">{{ conciseDesc }}</span>
       </div>
       <ul class="flex msm:hidden lg:flex">
-        <li class="text-base ml-4 font-mono font-bold">文章</li>
+        <li class="text-base ml-4 font-mono font-bold" @click="handlePath('allarticle')">文章</li>
         <li class="text-base ml-4 font-mono font-bold">相册</li>
       </ul>
       <div class="lg:hidden">
@@ -43,7 +43,7 @@
     </header>
     <transition name="height">
       <ul class="nav-menu" v-if="isShowMenu" :style="{top: `${navHeight}px`}">
-        <li class="text-right pr-8 leading-loose box-bordertext-base ml-4">
+        <li class="text-right pr-8 leading-loose box-bordertext-base ml-4" @click="handlePath('allarticle')">
           文章
         </li>
         <li class="text-right pr-8 leading-loose box-bordertext-base ml-4">
@@ -76,6 +76,11 @@ export default {
     showMenuHandle() {
       this.isShowMenu = true;
     },
+    handlePath(path) {
+      this.$router.push({
+        path
+      })
+    }
   },
   computed: {
     navHeight() {

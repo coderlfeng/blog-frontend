@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode prod",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode prod",
     "tailwind": "tailwindcss build -i src/assets/style/styles.css -o public/styles.css"
   },
   "dependencies": {

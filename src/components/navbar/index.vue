@@ -67,7 +67,7 @@ export default {
     };
   },
   created() {
-    console.log(this.avatar);
+    // console.log(this.avatar);
   },
   methods: {
     hideMenu() {

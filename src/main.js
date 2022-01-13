@@ -14,6 +14,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@/utils/rem.js'
 import "tailwindcss/tailwind.css"
 
+import "./assets/iconfonts/iconfont.css" // 字体图标样式
+
 new Vue({
   router,
   store,

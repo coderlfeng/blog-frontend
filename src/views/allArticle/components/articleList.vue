@@ -110,7 +110,7 @@ export default {
 		LPagination,
 	},
 	methods: {
-		async getArticles() {
+		async getArticles(tagId) {
 			const userid = useridIns.getUserId();
 			const res = await getArticles({
 				bloggerId: userid,
@@ -118,6 +118,7 @@ export default {
 				limit: this.size,
 				articleTitle: "",
 				sortType: 1,
+				tagId: tagId
 			});
 			this.articles = res.data.records;
 			this.total = res.data.total;
@@ -169,6 +170,9 @@ export default {
 	},
 	created() {
 		this.getArticles();
+		this.$EventBus.$on('getTagArticles', id => {
+			this.getArticles(id)
+		});
 	}
 };
 </script>
@@ -186,6 +190,7 @@ export default {
 		transform: scale(1);
 		transform-origin: center;
 		transition: all .8s;
+		cursor: pointer;
 
 		.left-side {
 			width: 35%;

@@ -1,6 +1,6 @@
 <template>
 	<div class="allarticle box-border" ref="allarticle" @click="hideMenu" @scroll="hideMenu">
-		<div class="allarticle-container">
+		<div class="allarticle-container pb-2">
 			<nav-bar
 				:avatar="blogInfo.avatar"
 				:concise-desc="blogInfo.conciseDesc"

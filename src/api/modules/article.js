@@ -11,7 +11,7 @@ const getArticleInfo = (params) =>
 // 获取文章标签列表
 const getArticleTagList = (params) =>
   service({
-    url: "/blog/back/get-article-tag",
+    url: "/blog/front/get-article-tag",
     method: "get",
     params,
   });

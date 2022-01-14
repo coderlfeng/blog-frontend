@@ -13,4 +13,8 @@ module.exports = {
       })
     );
   },
+  devServer: {
+    // port: port,
+    open: true,
+  }
 };

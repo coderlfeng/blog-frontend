@@ -87,6 +87,7 @@ export default {
     width: 35px;
     height: 35px;
     transform: translateX(-50%);
+    cursor: pointer;
   }
   //   }
 }

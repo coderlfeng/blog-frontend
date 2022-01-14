@@ -8,6 +8,12 @@ const getArticleInfo = (params) =>
     params,
   });
 
-export {
-    getArticleInfo
-}
+// 获取文章标签列表
+const getArticleTagList = (params) =>
+  service({
+    url: "/blog/front/get-article-tag",
+    method: "get",
+    params,
+  });
+
+export { getArticleInfo, getArticleTagList };

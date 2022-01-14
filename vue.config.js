@@ -10,7 +10,7 @@ module.exports = {
         filename: "[path].gz",
         algorithm: "gzip",
         threshold: 1024,
-        deleteOriginalAssets: true,
+        deleteOriginalAssets: false,
       })
     );
   },

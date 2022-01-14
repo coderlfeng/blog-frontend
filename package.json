@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode prod",
+    "serve": "vue-cli-service serve --mode dev",
     "build": "vue-cli-service build --mode prod",
-    "build:report": "vue-cli-service build --mode prod --report",
+    "build:report": "vue-cli-service build --mode dev --report",
     "tailwind": "tailwindcss build -i src/assets/style/styles.css -o public/styles.css"
   },
   "dependencies": {

@@ -9,8 +9,8 @@ module.exports = {
         test: /\.js$|\.html$|\.css$|\.jpg$|\.jpeg$|\.png/,
         filename: "[path].gz",
         algorithm: "gzip",
-        threshold: 10240,
-        deleteOriginalAssets: false,
+        threshold: 1024,
+        deleteOriginalAssets: true,
       })
     );
   },
@@ -25,17 +25,19 @@ module.exports = {
         libs: {
           name: "chunk-libs",
           test: /[\\/]node_modules[\\/]/,
-          priority: 10,
+          priority: 1,
           chunks: "initial",
           minSize: 0,
-          maxSize: 1024 * 20,
+          maxSize: 1024 * 100,
           minChunks: 1,
-          maxInitialRequests: 5
+          maxInitialRequests: 20,
         },
       },
     });
-    config
-      .plugin("webpack-bundle-analyzer")
-      .use(WebpackBundleAnalyzer.BundleAnalyzerPlugin);
+    config.when(process.env.NODE_ENV !== "development", (config) => {
+      config
+        .plugin("webpack-bundle-analyzer")
+        .use(WebpackBundleAnalyzer.BundleAnalyzerPlugin);
+    });
   },
 };

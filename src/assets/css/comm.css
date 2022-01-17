@@ -1,0 +1,122 @@
+/*
+    flex布局
+*/
+.flex{
+    display: flex;
+}
+.flex-wrap{
+    flex-wrap: wrap;
+}
+.flex-col{
+    flex-direction: column;
+}
+.flex-1{
+    flex: 1;
+}
+.a-i-center{
+    align-items: center;
+}
+.a-i-start{
+    align-items: flex-start;
+}
+.a-i-end{
+    align-items: flex-end;
+}
+.j-c-center{
+    justify-content: center;
+}
+.j-c-start{
+    justify-content: flex-start;
+}
+.j-c-end{
+    justify-content: flex-end;
+}
+.j-c-between{
+    justify-content: space-between;
+}
+.j-c-around{
+    justify-content: space-around;
+}
+.j-c-evenly{
+    justify-content: space-evenly;
+}
+
+/*
+    内外边距
+*/
+
+
+/*
+    字体
+*/
+.font-12{
+    font-size: 12px;
+}
+.font-14{
+    font-size: 14px;
+}
+.font-16{
+    font-size: 16px;
+}
+.font-18{
+    font-size: 18px;
+}
+.font-20{
+    font-size: 20px;
+}
+.font-22{
+    font-size: 22px;
+}
+
+/*
+    行高
+*/
+.l-h-12{
+    line-height: 12px;
+}
+.l-h-14{
+    line-height: 14px;
+}
+.l-h-16{
+    line-height: 16px;
+}
+.l-h-18{
+    line-height: 18px;
+}
+.l-h-20{
+    line-height: 20px;
+}
+.l-h-22{
+    line-height: 22px;
+}
+
+/*
+    font-weight
+*/
+.f-w-400{
+    font-weight: 400;
+}
+.f-w-700{
+    font-weight: 700;
+}
+
+/* 文本缩进 */
+.t-i-2{
+    text-indent: 2px;
+}
+
+/* 文本对齐 */
+.t-a-l{
+    text-align: left;
+}
+.t-a-c{
+    text-align: center;
+}
+.t-a-r{
+    text-align: right;
+}
+
+/* 鼠标手型 */
+.cursor-pointer{
+    cursor: pointer;
+}

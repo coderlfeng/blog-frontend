@@ -2,21 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import messagePlugin from '@/components/message/register'
 
 Vue.config.productionTip = false
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
 Vue.use(messagePlugin)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import '@/utils/rem.js'
-import "tailwindcss/tailwind.css"
 
-Vue.prototype.$EventBus = new Vue(); // 中央事件总线
+import "./assets/css/normalize.css" // 重置样式表
+import "./assets/css/comm.css" // 公共样式
 
 import "./assets/iconfonts/iconfont.css" // 字体图标样式
+
+Vue.prototype.$EventBus = new Vue(); // 中央事件总线
 
 new Vue({
   router,

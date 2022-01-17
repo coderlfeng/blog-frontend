@@ -2,14 +2,19 @@
   <div class="home box-border" @click="hideMenu" @scroll="hideMenu">
     <div class="home-main">
       <nav-bar :avatar="blogInfo.avatar" :concise-desc="blogInfo.conciseDesc" ref="navbar" />
-      <articles />
-      <album />
+      <!-- <articles /> -->
+      <!-- <album /> -->
     </div>
   </div>
 </template>
 
 <script>
+import isPC from '@/utils/isPC'
+if(isPC()) {
 
+}else {
+  
+}
 
 import showCase from "@/components/showcase/index";
 import articles from "./components/article/index.vue";

@@ -2,7 +2,8 @@
   <div class="home box-border" @click="hideMenu" @scroll="hideMenu">
     <div class="home-main">
       <nav-bar :avatar="blogInfo.avatar" :concise-desc="blogInfo.conciseDesc" ref="navbar" />
-      <!-- <articles /> -->
+      <introduction/>
+      <articles />
       <!-- <album /> -->
     </div>
   </div>
@@ -20,6 +21,7 @@ import showCase from "@/components/showcase/index";
 import articles from "./components/article/index.vue";
 import album from "./components/album/index.vue";
 import navBar from "@/components/navbar/index.vue";
+import introduction from "@/components/introduction/index.vue";
 import useridIns from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
 import albumItem from "./components/album/components/albumItem/index.vue"
@@ -28,9 +30,10 @@ export default {
   name: "home",
   components: {
     showCase,
+    navBar,
+    introduction,
     articles,
     album,
-    navBar,
     albumItem
   },
   data() {

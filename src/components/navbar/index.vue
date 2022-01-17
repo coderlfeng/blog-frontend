@@ -56,6 +56,9 @@ export default {
 		// console.log(this.avatar);
 	},
 	methods: {
+		hideMenu() {
+			this.isShowMenu = false;
+		},
 		changeMenuShow() {
 			this.isShowMenu = !this.isShowMenu;
 		},

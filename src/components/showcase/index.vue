@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import {divice} from '@/utils/divice'
-if(divice()) {
+import isPC from '@/utils/isPC'
+if(isPC()) {
   import("./index-PC.less")
 }else {
   import("./index-mobile.less")

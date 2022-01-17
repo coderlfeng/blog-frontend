@@ -1,4 +1,4 @@
-export const divice = () => {
+const isPC = () => {
     let mb = ['ipad', 'iphone os', 'midp', 'rv:1.2.3.4', 'ucweb', 'android', 'windows ce', 'windows mobile'];
     let isPC = true;
     mb.forEach(v => {
@@ -9,3 +9,5 @@ export const divice = () => {
     });
     return isPC;
 }
+
+export default isPC

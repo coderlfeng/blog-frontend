@@ -1,11 +1,11 @@
 <template>
-  <section class="showcase" :style="bgImg">
+  <section class="showcase" :style="bgImg" @mousewheel="handelMousewheel">
     <div class="blogInfo">
       <div class="avatar-container flex justify-center">
-        <img :src="blogInfo.avatar" alt="" class="w-12 h-12 md:w-5 md:h-5"/>
+        <img :src="blogInfo.avatar"/>
       </div>
-      <p class="py-6 md:py-2 text-4xl md:text-tiny">{{ blogInfo.name }}</p>
-      <p class="text-3xl md:text-tiny">{{ blogInfo.conciseDesc }}</p>
+      <p class="name">{{ blogInfo.name }}</p>
+      <p class="">{{ blogInfo.conciseDesc }}</p>
     </div>
     <img
       src="@/assets/images/home-down.png"
@@ -50,6 +50,11 @@ export default {
       const res = await getBlogInfo({ id: userid });
       this.blogInfo = res.data;
     },
+    handelMousewheel(e) {
+      if(e.deltaY >= 0) {
+        this.slideToHome();
+      };
+    }
   },
 };
 </script>
@@ -69,13 +74,14 @@ export default {
     backdrop-filter: blur(2px);
     .avatar-container {
       img {
-        // width: 60px;
-        // height: 60px;
+        margin: 0px auto;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
       }
     }
     .name {
-      padding: 25px 0;
+      padding: 20px 0;
       font-family: 'Microsoft Yahei', Courier, monospace;
     }
   }

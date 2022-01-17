@@ -9,6 +9,8 @@
 </template>
 
 <script>
+
+
 import showCase from "@/components/showcase/index";
 import articles from "./components/article/index.vue";
 import album from "./components/album/index.vue";

@@ -64,7 +64,6 @@
 						{{ article.subTitle }}
 					</div>
 					<div class="article-info">
-						<span class="">发布于：{{ article.createTime | formatTime }}</span>
 						<span class="">更新于：{{ article.updateTime | formatTime }}</span>
 					</div>
 				</div>
@@ -91,7 +90,7 @@ if (isPC()) {
 
 import { getArticles } from "@/api/modules/home";
 import useridIns from "@/utils/userid";
-import { format } from "@/utils/time";
+import { normalizeDate } from "@/utils/time";
 
 import LPagination from "@/components/pagination/index.vue";
 
@@ -191,7 +190,7 @@ export default {
 	},
 	filters: {
 		formatTime(val) {
-			return format(val);
+			return normalizeDate(val);
 		},
 	},
 	created() {

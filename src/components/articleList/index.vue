@@ -16,14 +16,14 @@
 				<div class="right-side">
 					<ul class="tags-list" v-if="isPC">
 						<li
-							v-for="(tag) in article.tags"
+							v-for="(tag, i) in article.tags"
 							:key="tag.tagId"
 							class="article-tag"
 							:style="{
 								backgroundColor: `rgba(${
-									colorEnum[index % 3].bg
+									colorEnum[i % 3].bg
 								})`,
-								color: colorEnum[index % 3].color,
+								color: colorEnum[i % 3].color,
 							}"
 						>
 							{{ tag.tagName }}

@@ -1,0 +1,124 @@
+.side-bar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translateX(100%);
+	padding: 5vw 5vw;
+	width: 70vw;
+	height: 60vh;
+	background-color: rgba(255, 255, 255, 0.3);
+	z-index: 99;
+	transition: all .5s;
+	
+	.item-list{
+		width: 61vw;
+		height: 100%;
+		overflow-y: scroll;
+
+		.item {
+			margin: 0 0 5vw 0;
+			padding: 5vw;
+			width: 100%;
+			border-radius: 10px;
+			background-color: #eee;
+	
+			.title{
+				margin-bottom: 1vw;
+				font-size: 1rem;
+				font-weight: 700;
+			}
+	
+			.top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+	
+				.animals {
+					width: 60px;
+					height: 60px;
+				}
+			}
+	
+			.poetry {
+				display: flex;
+				flex-direction: column;
+				margin: 5vw 0 2vw;
+				padding: 2vw;
+	
+				.poetry-author{
+					text-align: right;
+				}
+			}
+	
+	
+			.latest-article-item {
+				cursor: pointer;
+	
+				&:hover {
+					text-decoration: underline;
+					color: rgb(192, 111, 36);
+				}
+			}
+	
+			.tags-list {
+				display: flex;
+				flex-wrap: wrap;
+	
+				.tags {
+					margin: 5px 10px;
+					padding: 1px 15px;
+					font-size: 12px;
+					border-radius: 6px;
+					cursor: pointer;
+				}
+			}
+	
+			.contact {
+				display: flex;
+				margin-top: 10px;
+	
+				img {
+					margin-right: 10px;
+					width: 100px;
+					height: 100px;
+				}
+			}
+		}
+	}
+
+	
+	.btn-close-sidebar{
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translateX(-100%);
+		background-color: rgba(255, 255, 255, .5);
+		transition: all .5s;
+		
+		.icon-dbright, .icon-bdleft{
+			display: block;
+			transform: scale(0.7, 1.3);
+			font-size: 1.5rem;
+			color: #666;
+		}
+
+		.icon-dbright{
+			color: #000;
+		}
+	}
+}
+
+.side-bar-show{
+	transform: translateX(0);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: all 1.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+	transform: translateY(50%);
+}

@@ -1,87 +1,116 @@
 <template>
-  <div class="home box-border" @click="hideMenu" @scroll="hideMenu">
-    <div class="home-main">
-      <nav-bar :avatar="blogInfo.avatar" :concise-desc="blogInfo.conciseDesc" ref="navbar" />
-      <introduction/>
-      <articles />
-      <!-- <album /> -->
-    </div>
-  </div>
+	<div
+		class="home"
+		ref="home"
+		@click="hideMenu"
+		@scroll="hideMenu"
+	>
+		<div class="home-container">
+			<nav-bar
+				:avatar="blogInfo.avatar"
+				:concise-desc="blogInfo.conciseDesc"
+				ref="navbar"
+			/>
+			<introduction/>
+			<div class="home-main">
+				<div class="home-main-right">
+					<div class="title-article"><span class="text">最新文章</span></div>
+          			<articleList :showPage="false" :scrollBox="'home'"/>
+					<div class="title-album">精美图集</div>
+          			<!-- <album /> -->
+          			<album2/>
+        		</div>
+				<sideBar/>
+			</div>
+		</div>
+
+		<div
+			class="toTop"
+			:class="showToTop ? 'toTop-show' : ''"
+			@click="toTop"
+		>
+			<div class="line"></div>
+			<div class="text">toTop</div>
+			<img :src="require('@/assets/images/toTop.png')" />
+		</div>
+	</div>
 </template>
 
 <script>
-import isPC from '@/utils/isPC'
-if(isPC()) {
-
-}else {
-  
+import isPC from "@/utils/isPC";
+if (isPC()) {
+  import("./index-PC.less")
+} else {
+  import("./index-mobile.less")
 }
 
 import showCase from "@/components/showcase/index";
-import articles from "./components/article/index.vue";
-import album from "./components/album/index.vue";
 import navBar from "@/components/navbar/index.vue";
 import introduction from "@/components/introduction/index.vue";
+import articleList from "@/components/articleList/index.vue"
+import album from "./components/album/index.vue";
+import album2 from "./components/album2/index.vue"
+import sideBar from "@/components/sideBar/index.vue"
 import useridIns from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
-import albumItem from "./components/album/components/albumItem/index.vue"
 
 export default {
-  name: "home",
-  components: {
-    showCase,
-    navBar,
-    introduction,
-    articles,
-    album,
-    albumItem
-  },
-  data() {
-    return {
-      home: {
-        backgroundImage: "url(" + require("@/assets/images/home.jpg") + ")",
-        backgroundPosition: "center",
-      },
-      blogInfo: {},
-    };
-  },
-  created() {
-    this.getBlogInfo();
-  },
+	name: "home",
+	components: {
+		showCase,
+		navBar,
+		introduction,
+		articleList,
+		album,
+    album2,
+    sideBar
+	},
+	data() {
+		return {
+			home: {
+				backgroundImage:
+					"url(" + require("@/assets/images/home.jpg") + ")",
+				backgroundPosition: "center",
+			},
+			blogInfo: {},
+      showToTop: false,
+			toTopTimer: null
+		};
+	},
+	created() {
+		this.getBlogInfo();
+	},
 
-  methods: {
-    async getBlogInfo() {
-      const userid = useridIns.getUserId();
-      const res = await getBlogInfo({ id: userid });
-      this.blogInfo = res.data;
-    },
-    hideMenu() {
-      this.$refs.navbar && this.$refs.navbar.hideMenu()
-    }
-  },
+	methods: {
+		async getBlogInfo() {
+			const userid = useridIns.getUserId();
+			const res = await getBlogInfo({ id: userid });
+			this.blogInfo = res.data;
+		},
+		hideMenu() {
+			this.$refs.navbar && this.$refs.navbar.hideMenu();
+      if(this.$refs.home.scrollTop > 400) {
+				this.showToTop = true;
+			}else {
+				this.showToTop = false;
+			}
+		},
+    // 回到顶部
+		toTop() {
+			this.showToTop = false;
+			let h = this.$refs.home.scrollTop;
+			this.toTopTimer = setInterval(() => {
+				h -= 100;
+				this.$refs.home.scrollTo(0, h);
+				if(h <= 0) {
+					clearInterval(this.toTopTimer);
+					return;
+				};
+			}, 20)
+		}
+	},
 };
 </script>
 
 <style lang="less" scoped>
-.home {
-  height: 100vh;
-  overflow-y: scroll;
-  background: url("../../assets/images/bg1.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
-  @media only screen and (max-width: 1000px) {
-    .home-main {
-      backdrop-filter: blur(1px);
-    }
-  }
-  @media only screen and (min-width: 1000px) {
-    padding: 0 10%;
-    box-sizing: border-box;
-    background: url("../../assets/images/bg1.jpg") no-repeat;
-    .home-main {
-      backdrop-filter: blur(20px);
-      box-shadow: 15px 0 20px -1px rgba(255,255,255,.3), -15px 0 20px -1px rgba(255,255,255,.3);
-    }
-  }
-}
 </style>

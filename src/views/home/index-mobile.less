@@ -1,0 +1,57 @@
+.home {
+	height: 100%;
+	width: 100vw;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background: url("../../assets/images/bg1.jpg") no-repeat;
+	background-size: cover;
+	background-position: center;
+
+	.home-container{
+		margin: 0 auto;
+	}
+
+    .home-main{
+		position: relative;
+        padding: 5vw;
+
+		.home-main-right{
+			width: 100%;
+		}
+    }
+
+	.toTop{
+		position: fixed;
+		bottom: 10vh;
+		transform: translateY(-90vh);
+		right: 4vw;
+		width: 16vw;
+		cursor: pointer;
+		z-index: 9999;
+		transition: all .5s;
+
+		.line{
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%) translateY(-100%);
+			width: 1px;
+			height: 90vh;
+			border: 1px solid #ccc;
+			z-index: 99;
+		}
+
+		.text{
+			position: absolute;
+			top: 52%;
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: 0.75rem;
+			color: #fff;
+		}
+	}
+
+	.toTop-show{
+		transform: translateY(0vh);
+	}
+}

@@ -63,7 +63,7 @@
 					<div class="article-subTitle">
 						{{ article.subTitle }}
 					</div>
-					<div class="article-info">
+					<div class="article-item-info">
 						<span class="">更新于：{{ article.updateTime | formatTime }}</span>
 					</div>
 				</div>

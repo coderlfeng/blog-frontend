@@ -1,23 +1,41 @@
 <template>
   <div class="album">
-    <navBar/>
-    <waterfall
-      ref="waterfall"
-      :imgsArr="imgsArr"
-      :gap="10"
-      @scrollReachBottom="getAlbumImgs"
-    >
-      <div slot="waterfall-over"></div>
-    </waterfall>
-    <footBar/>
+    <div class="album-container">
+      <navBar
+				:avatar="blogInfo.avatar"
+				:concise-desc="blogInfo.conciseDesc"
+				ref="navbar"
+			/>
+      <div class="waterfall-container">
+        <waterfall
+          ref="waterfall"
+          :imgsArr="imgsArr"
+          :gap="10"
+          @scrollReachBottom="getAlbumImgs"
+        >
+          <div slot="waterfall-over"></div>
+        </waterfall>
+      </div>
+      <footBar/>
+    </div>
   </div>
 </template>
 
 <script>
+import isPC from "@/utils/isPC";
+if (isPC()) {
+  import("./index-PC.less")
+} else {
+  import("./index-mobile.less")
+}
+
 import navBar from "@/components/navbar/index.vue"
 import footBar from "@/components/footBar/index.vue"
 
 import { getAlbumImgs } from "@/api/modules/album";
+import useridIns from "@/utils/userid";
+import { getBlogInfo } from "@/api/modules/home";
+
 import waterfall from "vue-waterfall-easy";
 export default {
   components: {
@@ -32,11 +50,13 @@ export default {
       // 分页条件
       page: 1,
       size: 20,
+      blogInfo: {}
     };
   },
   created() {
     this.albumId = this.$route.query.id;
     this.getAlbumImgs();
+    this.getBlogInfo();
   },
   methods: {
     async getAlbumImgs() {
@@ -55,32 +75,14 @@ export default {
       this.page++;
       imgs.length < this.size && this.$refs["waterfall"].waterfallOver();
     },
+    async getBlogInfo() {
+			const userid = useridIns.getUserId();
+			const res = await getBlogInfo({ id: userid });
+			this.blogInfo = res.data;
+		},
   },
 };
 </script>
 
 <style lang="less" scoped>
-.album {
-  width: 100%;
-  height: 100%;
-  @media only screen and (max-width: 1000px) {
-    background: url("../../assets/images/bg1.jpg") no-repeat center;
-    /deep/ .vue-waterfall-easy-scroll {
-      backdrop-filter: blur(10px);
-    }
-  }
-  @media only screen and (min-width: 1000px) {
-    padding: 0 10%;
-    box-sizing: border-box;
-    background: url("../../assets/images/bg1.jpg") no-repeat;
-    /deep/ .vue-waterfall-easy-scroll {
-      backdrop-filter: blur(20px);
-    }
-  }
-  .vue-waterfall-easy-scroll {
-    /deep/ .over {
-      bottom: 0;
-    }
-  }
-}
 </style>

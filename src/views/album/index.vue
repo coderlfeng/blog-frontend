@@ -1,5 +1,6 @@
 <template>
   <div class="album">
+    <navBar/>
     <waterfall
       ref="waterfall"
       :imgsArr="imgsArr"
@@ -8,15 +9,21 @@
     >
       <div slot="waterfall-over"></div>
     </waterfall>
+    <footBar/>
   </div>
 </template>
 
 <script>
+import navBar from "@/components/navbar/index.vue"
+import footBar from "@/components/footBar/index.vue"
+
 import { getAlbumImgs } from "@/api/modules/album";
 import waterfall from "vue-waterfall-easy";
 export default {
   components: {
+    navBar,
     waterfall,
+    footBar
   },
   data() {
     return {

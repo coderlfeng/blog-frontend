@@ -18,6 +18,8 @@
         		</div>
 				<sideBar/>
 			</div>
+
+			<footBar/>
 		</div>
 
 		<div
@@ -44,6 +46,7 @@ import navBar from "@/components/navbar/index.vue";
 import introduction from "@/components/introduction/index.vue";
 import articleList from "@/components/articleList/index.vue"
 import sideBar from "@/components/sideBar/index.vue"
+import footBar from "@/components/footBar/index.vue"
 
 import useridIns from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
@@ -54,7 +57,8 @@ export default {
 		navBar,
 		introduction,
 		articleList,
-    	sideBar
+    	sideBar,
+		footBar
 	},
 	data() {
 		return {

@@ -22,6 +22,8 @@
         		</div>
 				<sideBar/>
 			</div>
+
+			<footBar/>
 		</div>
 
 		<div
@@ -44,26 +46,27 @@ if (isPC()) {
   import("./index-mobile.less")
 }
 
-import showCase from "@/components/showcase/index";
 import navBar from "@/components/navbar/index.vue";
 import introduction from "@/components/introduction/index.vue";
 import articleList from "@/components/articleList/index.vue"
-import album from "./components/album/index.vue";
+// import album from "./components/album/index.vue";
 import album2 from "./components/album2/index.vue"
 import sideBar from "@/components/sideBar/index.vue"
+import footBar from "@/components/footBar/index.vue"
+
 import useridIns from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
 
 export default {
 	name: "home",
 	components: {
-		showCase,
 		navBar,
 		introduction,
 		articleList,
-		album,
-    album2,
-    sideBar
+		// album,
+		album2,
+		sideBar,
+		footBar
 	},
 	data() {
 		return {

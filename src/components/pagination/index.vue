@@ -1,6 +1,7 @@
 <template>
 	<div class="pagination-page text-tiny">
-		<div class="total" v-if="hasTotal">共 {{ total }} 条</div>
+		<div class="total" v-if="hasTotal && isPC">共 {{ total }} 条</div>
+		<div class="total" v-if="hasTotal && !isPC">共 {{ total }} 条 / {{ Math.ceil(total/size) }} 页</div>
 		<div class="size pagination_click_lh_toggleShow_ttt" ref="size" v-if="hasSizes" @click.self="toggleShow">
 			{{ size }}条/页 <i class="iconfont icon-down pagination_click_lh_toggleShow_ttt" ref="icon" @click.self="toggleShow"></i>
 
@@ -14,12 +15,15 @@
 		</div>
 
         <button class="page-btns" @click="pagedown" :disabled="leftDisabled" :class="leftDisabled ? 'forbidden' : ''"><i class="iconfont icon-left"></i></button>
-        <ul class="page-item-list">
+        <ul class="page-item-list" v-if="isPC">
             <li class="page-item" @click="handelPageChange(1)" v-if="leftPage">1</li>
             <li class="page-item" @click="goLeft" @mouseenter="toleft = false" @mouseleave="toleft = true" v-if="leftPage"><i class="iconfont icon-ellipsis" v-if="toleft"></i><i v-if="!toleft" class="iconfont icon-bdleft"></i></li>
             <li class="page-item" @click="handelPageChange(i)" v-for="i in pageArr" :key="i">{{i}}</li>
             <li class="page-item" @click="goRight"  @mouseenter="toright = false" @mouseleave="toright = true" v-if="rightPage"><i class="iconfont icon-ellipsis" v-if="toright"></i><i v-if="!toright" class="iconfont icon-dbright"></i></li>
             <li class="page-item" @click="handelPageChange(totalPage)" v-if="rightPage">{{totalPage}}</li>
+        </ul>
+        <ul class="page-item-list" v-if="!isPC">
+            <li class="page-item">{{ nowPage }}</li>
         </ul>
         <button class="page-btns" @click="pageup" :disabled="rightDisabled" :class="rightDisabled ? 'forbidden' : ''"><i class="iconfont icon-right"></i></button>
 
@@ -28,9 +32,17 @@
 </template>
 
 <script>
+import isPC from "@/utils/isPC";
+if (isPC()) {
+  import("./index-PC.less")
+} else {
+  import("./index-mobile.less")
+}
+
 export default {
 	data() {
 		return {
+            isPC: true,
 			show: false,
             pageArr: [4, 5, 6, 7, 8],
             totalPage: 0,
@@ -288,6 +300,7 @@ export default {
         }
     },
     created() {
+        this.isPC = isPC();
         this.initLayout();
         this.init();
     },
@@ -315,147 +328,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.pagination-page {
-	display: flex;
-	line-height: 28px;
-    color: #aaa;
-
-	.total {
-		margin-right: 10px;
-	}
-
-	.size {
-		position: relative;
-		padding: 0 10px;
-        margin-right: 10px;
-		border: 1px solid #dcdfe6;
-		border-radius: 4px;
-		cursor: pointer;
-        background-color: #fff;
-        user-select: none;
-
-		.icon-down {
-            display: inline-block;
-			margin-left: 5px;
-			font-size: 12px;
-			color: #dcdfe6;
-            transition: all .1s linear;
-		}
-
-        .size-list-wrap{
-            position: absolute;
-            top: 38px;
-            left: 0;
-            height: 0;
-            width: 100%;
-            transition: all .1s linear;
-            overflow: hidden;
-        }
-
-		.size-list {
-			position: absolute;
-			top: 5px;
-			left: 0;
-			padding: 5px 0;
-			width: 100%;
-			border: 1px solid #dcdfe6;
-			border-radius: 4px;
-            box-shadow: 0px 0px 5px #ddd;
-            background-color: #fff;
-
-			li {
-				line-height: 36px;
-				text-indent: 15px;
-
-				&:hover {
-					color: #409eff;
-					background-color: #f5f7fa;
-				}
-			}
-
-			.first {
-				display: block;
-				position: absolute;
-				top: -5px;
-				left: 30px;
-				transform: rotateZ(45deg);
-				width: 8px;
-				height: 8px;
-				border-left: 1px solid #dcdfe6;
-				border-top: 1px solid #dcdfe6;
-				background-color: #fff;
-			}
-
-            .last{
-                display: block;
-				position: absolute;
-				bottom: -5px;
-				left: 30px;
-				transform: rotateZ(225deg);
-				width: 8px;
-				height: 8px;
-				border-left: 1px solid #dcdfe6;
-				border-top: 1px solid #dcdfe6;
-				background-color: #fff;
-            }
-		}
-	}
-
-    .page-btns{
-        width: 38px;
-        height: 30px;
-        line-height: 30px;
-        font-size: 14px;
-        text-align: center;
-        border: 0;
-        // background-color: #fff;
-
-        &:not(.forbidden):hover{
-            color: #409eff;
-        }
-    }
-
-    .forbidden{
-        cursor: not-allowed;
-    }
-
-    .page-item-list{
-        display: flex;
-        align-items: center;
-        color: #999;
-
-        .page-item{
-            width: 38px;
-            line-height: 28px;
-            text-align: center;
-            cursor: pointer;
-            user-select: none;
-
-            .iconfont{
-                font-size: 14px;
-            }
-
-            &:hover{
-                color: #409eff;
-            }
-        }
-
-        .active{
-            color: #409eff;
-        }
-    }
-
-    .page-inpt-container{
-        margin-left: 10px;
-
-        .page-inpt{
-            width: 50px;
-            height: 28px;
-            text-align: center;
-            color: #222;
-            border: 1px solid #dcdfe6;
-            border-radius: 4px;
-        }
-    }
-}
 </style>

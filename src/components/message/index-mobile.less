@@ -1,0 +1,33 @@
+.message {
+    position: fixed;
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 1vw 3vw;
+    font-size: .9rem;
+    border-radius: 1vw;
+    display: flex;
+    align-items: center;
+    z-index: 999999;
+    img {
+      width: 5vw;
+      height: 5vw;
+      border-radius: 3vw;
+      margin-right: 1.5vw;
+    }
+  }
+  .transform-enter-active, .transform-leave-active {
+    transition: all .3s ease-in-out;
+  }
+  .transform-leave-to{
+    transform: translateX(2vw);
+    opacity: 0;
+  }
+  .transform-enter {
+      transform: translateX(-2vw);
+      opacity: 0;
+  }
+  .transform-enter-to {
+      transform: translateX(0);
+      opacity: 1;
+  }

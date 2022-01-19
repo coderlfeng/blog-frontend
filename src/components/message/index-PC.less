@@ -1,0 +1,33 @@
+.message {
+    position: fixed;
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    z-index: 999999;
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
+      margin-right: 7px;
+    }
+  }
+  .transform-enter-active, .transform-leave-active {
+    transition: all .3s ease-in-out;
+  }
+  .transform-leave-to{
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  .transform-enter {
+      transform: translateX(-10px);
+      opacity: 0;
+  }
+  .transform-enter-to {
+      transform: translateX(0);
+      opacity: 1;
+  }

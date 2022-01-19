@@ -1,11 +1,31 @@
 <template>
 	<div class="album-container">
-        <ul class="list" ref="list">
+        <!-- PC端 -->
+        <ul class="list" ref="list" v-if="isPC">
             <li
                 class="item"
                 v-for="(album, index) in albums"
                 :key="album.id"
                 :style="{transform: `rotateY(${36*(index+3)}deg) translateZ(360px)`,
+                    backgroundImage: `url(${album.albumCover})`
+                }"
+                @click="handelClick(album)"
+                @mouseenter="stopRotate"
+                @mouseleave="startRotate"
+            >
+                <img v-if="album.isPrivate" src="@/assets/images/lock.png" class="lock">
+                <div class="album-name">{{album.albumName}}</div>
+            </li>
+            <li class="item-bg"></li>
+        </ul>
+
+        <!-- 移动端 -->
+        <ul class="list" ref="list" v-if="!isPC">
+            <li
+                class="item"
+                v-for="(album, index) in albums"
+                :key="album.id"
+                :style="{transform: `scale(${rotateArr[index]==0 ? '1, 1' : '0.75, 0.75'}) translateX(${rotateArr[index]==0 ? '0' : (rotateArr[index]==1 ? '40' : (rotateArr[index]==3 ? '-40' : '0'))}vw) translateZ(${rotateArr[index]==0 ? '30' : (rotateArr[index]==2 ? '-30' : '-10')}vw)`,
                     backgroundImage: `url(${album.albumCover})`
                 }"
                 @click="handelClick(album)"
@@ -54,6 +74,7 @@ export default {
             showModel: false,
             password: '',
             rotateDeg: 0,
+            rotateArr: [],
             rotateTimer: null
         }
     },
@@ -66,15 +87,31 @@ export default {
             const bloggerId = useridIns.getUserId();
             const res = await getBloggerAlbum({ bloggerId, sort: 2, page: 1, size: isPC() ? 10 : 4 });
             this.albums = res.data.records;
+            for(let i = 0; i < this.albums.length; i++) {
+                this.rotateArr.push(i);
+            };
+            this.$nextTick(() => {
+                this.startRotate();
+            });
         },
         startRotate() {
-            if(this.rotateTimer) clearInterval(this.rotateTimer);
-            this.rotateTimer = setInterval(() => {
-                this.rotateDeg ++;
-                this.$refs.list.style.transform = `rotateX(-10deg) rotateY(${this.rotateDeg*0.2}deg) rotateX(10deg)`
-            }, 30)
+            if(this.albums.length <= 0) return;
+            if(isPC()) {
+                if(this.rotateTimer) clearInterval(this.rotateTimer);
+                this.rotateTimer = setInterval(() => {
+                    this.rotateDeg ++;
+                    this.$refs.list.style.transform = `rotateX(-10deg) rotateY(${this.rotateDeg*0.2}deg) rotateX(10deg)`
+                }, 30)
+            }else {
+                if(this.rotateTimer) clearInterval(this.rotateTimer);
+                this.rotateTimer = setInterval(() => {
+                    let a = this.rotateArr.splice(this.rotateArr.length-1, 1);
+                    this.rotateArr.unshift(a[0]);
+                }, 2000)
+            };
         },
         stopRotate() {
+            if(!isPC()) return;
             clearInterval(this.rotateTimer);
         },
         handelClick(data) {
@@ -115,7 +152,7 @@ export default {
         this.getAlbums();
     },
     mounted() {
-        this.startRotate();
+        
     },
     beforeDestroy() {
         clearInterval(this.rotateTimer);

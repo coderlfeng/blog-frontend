@@ -1,0 +1,60 @@
+.album-container{
+	width: 100%;
+	height: 85vw;
+	overflow: hidden;
+
+	.list{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transform: rotateX(-10deg);
+		transform-style: preserve-3d;
+		transform-origin: center 100px;
+	
+		.item{
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: flex-end;
+			position: absolute;
+			top: 5vw;
+			left: 30vw;
+			width: 30vw;
+			height: 42vw;
+			text-align: center;
+			background-size: 100% 100%;
+			box-shadow:0 0 8px #eaeaea;
+			box-shadow: 1px -1px 6px #666;
+			-webkit-box-reflect:below 5px -webkit-linear-gradient(top,rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.7));
+            transition: all .5s;
+
+			.album-name{
+				margin-bottom: 2vw;
+				width: 100%;
+				text-align: center;
+				font-size: 0.75rem;
+				line-height: 1.5rem;
+				font-weight: 700;
+				background-color: rgba(255, 255, 255, .5);
+			}
+
+			.lock{
+				margin-bottom: 10vw;
+				margin-right: 1vw;
+				width: 6vw;
+				height: 6vw;
+			}
+		}
+
+		.item-bg{
+			position: absolute;
+			top: 0;
+			left: -10%;
+			transform: rotateX(90deg) translateY(25vw) translateZ(10vw);
+			width: 120%;
+			height: 100vw;
+			border-radius: 50%;
+			background:-webkit-radial-gradient(center center,600px 600px,rgba(158,158,222,0.5),rgba(0,0,0,0));
+		}
+	}
+}

@@ -13,6 +13,13 @@
 </template>
 
 <script>
+import isPC from "@/utils/isPC";
+if (isPC()) {
+	import("./index-PC.less");
+} else {
+	import("./index-mobile.less");
+}
+
 export default {
   props: {
     type: {
@@ -46,11 +53,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.__button {
-  text-align: center;
-  background-color: pink;
-  font-size: 14px;
-  padding: 3px 14px;
-  // border-radius: 40px;
-}
 </style>

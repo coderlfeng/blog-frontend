@@ -1,0 +1,39 @@
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .1s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  .pwdPop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    .model {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 1vw;
+      padding: 3vw;
+      box-sizing: border-box;
+    }
+    .cancel {
+      position: absolute;
+      width: 5vw;
+      height: 5vw;
+      top: 3vw;
+      right: 3vw;
+    }
+    .header {
+      width: 100%;
+      font-size: .9rem;
+      margin-bottom: 3vw;
+    }
+    .__default_footer {
+      text-align: right;
+      margin-top: 3vw;
+    }
+  }

@@ -1,0 +1,39 @@
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .1s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  .pwdPop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    .model {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 5px;
+      padding: 13px;
+      box-sizing: border-box;
+    }
+    .cancel {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 15px;
+      right: 15px;
+    }
+    .header {
+      width: 100%;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    .__default_footer {
+      text-align: right;
+      margin-top: 15px;
+    }
+  }

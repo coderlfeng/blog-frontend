@@ -14,7 +14,7 @@
 			<introduction/>
 			<div class="home-main">
 				<div class="home-main-right">
-					<div class="title-article"><span class="text">最新文章</span></div>
+					<div class="title-article">最新文章</div>
           			<articleList :showPage="false" :scrollBox="'home'"/>
 					<div class="title-album">精美图集</div>
           			<!-- <album /> -->
@@ -68,8 +68,7 @@ export default {
 	data() {
 		return {
 			home: {
-				backgroundImage:
-					"url(" + require("@/assets/images/home.jpg") + ")",
+				backgroundImage: "url(" + require("@/assets/images/home.jpg") + ")",
 				backgroundPosition: "center",
 			},
 			blogInfo: {},

@@ -1,86 +1,85 @@
 .side-bar {
-	padding: 0 0 0 20px;
-	width: 30%;
+  padding: 0 0 0 20px;
+  width: 30%;
 
-	.item {
-		margin: 0 0 20px 0;
-		padding: 20px;
-		width: 100%;
-		border-radius: 10px;
-		background-color: rgba(255, 255, 255, 0.5);
+  .item {
+    margin: 0 0 20px 0;
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
 
-		.title{
-			margin-bottom: 5px;
-			font-size: 16px;
-			font-weight: 700;
-		}
+    .title {
+      margin-bottom: 5px;
+      font-size: 16px;
+      font-weight: 700;
+    }
 
-		.top {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-			.animals {
-				width: 60px;
-				height: 60px;
-			}
-		}
+      .animals {
+        width: 60px;
+        height: 60px;
+      }
+    }
 
-		.poetry {
-			display: flex;
-			flex-direction: column;
-			margin: 20px 0 10px;
-			padding: 10px;
-			border-radius: 10px;
+    .poetry {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0 10px;
+      padding: 10px;
+      border-radius: 10px;
 
-			.poetry-author{
-				text-align: right;
-			}
-		}
+      .poetry-author {
+        text-align: right;
+      }
+    }
 
+    .latest-article-item {
+      cursor: pointer;
+      line-height: 24px;
+      &:hover {
+        text-decoration: underline;
+        color: rgb(192, 111, 36);
+      }
+    }
 
-		.latest-article-item {
-			cursor: pointer;
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
 
-			&:hover {
-				text-decoration: underline;
-				color: rgb(192, 111, 36);
-			}
-		}
+      .tags {
+        margin: 5px 10px;
+        padding: 1px 15px;
+        font-size: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    }
 
-		.tags-list {
-			display: flex;
-			flex-wrap: wrap;
+    .contact {
+      display: flex;
+      margin-top: 10px;
 
-			.tags {
-				margin: 5px 10px;
-				padding: 1px 15px;
-				font-size: 12px;
-				border-radius: 6px;
-				cursor: pointer;
-			}
-		}
-
-		.contact {
-			display: flex;
-			margin-top: 10px;
-
-			img {
-				margin-right: 10px;
-				width: 100px;
-				height: 100px;
-			}
-		}
-	}
+      img {
+        margin-right: 10px;
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
 }
 
 .fade-enter-active,
 .fade-leave-active {
-	transition: all 1.5s;
+  transition: all 1.5s;
 }
 
 .fade-enter,
 .fade-leave-to {
-	opacity: 0;
-	transform: translateY(50%);
+  opacity: 0;
+  transform: translateY(50%);
 }

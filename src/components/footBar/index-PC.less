@@ -1,11 +1,34 @@
-.footer-container{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100px;
-	line-height: 24px;
-	color: #fff;
-	background-color: rgba(0,0,0,.7);
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  line-height: 24px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 0;
+  .footer-desc {
+    font-size: 12px;
+  }
+  .footer-filing {
+    font-size: 12px;
+  }
+  .footer-notice {
+    font-size: 12px;
+  }
+  .footer-run-time {
+    font-size: 12px;
+  }
+}
+
+.stretch-enter-active,
+.stretch-leave-active {
+  transition: all 0.3s;
+}
+
+.stretch-enter,
+.stretch-leave-to {
+  opacity: 0;
 }

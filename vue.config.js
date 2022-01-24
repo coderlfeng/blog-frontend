@@ -1,6 +1,6 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer");
-
+console.log(process.env);
 module.exports = {
   productionSourceMap: false,
   configureWebpack: (config) => {
@@ -34,10 +34,8 @@ module.exports = {
         },
       },
     });
-    config.when(process.env.NODE_ENV !== "development", (config) => {
-      config
-        .plugin("webpack-bundle-analyzer")
-        .use(WebpackBundleAnalyzer.BundleAnalyzerPlugin);
-    });
+    config
+      .plugin("webpack-bundle-analyzer")
+      .use(WebpackBundleAnalyzer.BundleAnalyzerPlugin);
   },
 };

@@ -10,6 +10,7 @@ Vue.use(messagePlugin)
 import "./assets/css/normalize.css" // 重置样式表
 
 import "./assets/iconfonts/iconfont.css" // 字体图标样式
+import "./assets/css/font.css"
 
 Vue.prototype.$EventBus = new Vue(); // 中央事件总线
 

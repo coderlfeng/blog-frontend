@@ -1,5 +1,8 @@
 <template>
-  <div class="introduction" :style="{ backgroundImage: `url(${descBg})` }">
+  <div
+    class="introduction"
+    :style="{ backgroundImage: `url(${$store.getters.descBg})` }"
+  >
     <div class="icon-lists icon-list-top">
       <img src="@/assets/images/arrow-bottom-dot.png" />
       <img src="@/assets/images/arrow-bottom-dot.png" />
@@ -38,26 +41,9 @@ export default {
       const res = await getBlogInfo({ id: userid });
       this.blogInfo = res.data;
     },
-    getDescBackground() {
-      this.background = isPC()
-        ? this.$store.state.theme.descPcBg
-        : this.$store.state.theme.descMobileBg;
-      console.log(this.background);
-    },
   },
   created() {
     this.getBlogInfo();
-    setTimeout(() => {
-      this.getDescBackground();
-    }, 0);
-    console.log(this.$store.state.theme.descPcBg);
-  },
-  computed: {
-    descBg() {
-      return this.background
-        ? this.background
-        : require("@/assets/images/m-bg2.jpg");
-    },
   },
 };
 </script>

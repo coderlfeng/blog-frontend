@@ -2,16 +2,15 @@
   <div
     class="home"
     ref="home"
-    :style="{ backgroundImage: `url(${homeBg})` }"
+    :style="{ backgroundImage: `url(${$store.getters.mainBg})` }"
     @click="hideMenu"
-    @scroll="hideMenu"
   >
     <nav-bar
       :avatar="blogInfo.avatar"
       :concise-desc="blogInfo.conciseDesc"
       ref="navbar"
     />
-    <div class="home-container">
+    <div class="home-container" ref="container" @scroll="hideMenu">
       <introduction />
       <div class="home-main">
         <div class="home-main-right">
@@ -80,23 +79,8 @@ export default {
   },
   created() {
     this.getBlogInfo();
-    setTimeout(() => {
-      this.getHomeBg();
-    }, 0);
-  },
-  computed: {
-    homeBg() {
-      return this.background
-        ? this.background
-        : require("@/assets/images/bg1.jpg");
-    },
   },
   methods: {
-    getHomeBg() {
-      this.background = isPC()
-        ? this.$store.state.theme.principalPcBg
-        : this.$store.state.theme.principalMobileBg;
-    },
     async getBlogInfo() {
       const userid = useridIns.getUserId();
       const res = await getBlogInfo({ id: userid });
@@ -109,7 +93,8 @@ export default {
       } else {
         this.showToTop = false;
       }
-      const container = this.$refs.home;
+      const container = this.$refs.container;
+      console.log(container);
       this.showFooter =
         container.scrollHeight - container.scrollTop <
         container.offsetHeight + 200;

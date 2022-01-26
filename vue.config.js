@@ -1,24 +1,15 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer");
-console.log(process.env);
+const UglifyPlugin = require("uglifyjs-webpack-plugin");
+
 module.exports = {
   productionSourceMap: false,
-  configureWebpack: (config) => {
-    config.plugins.push(
-      new CompressionPlugin({
-        test: /\.js$|\.html$|\.css$|\.jpg$|\.jpeg$|\.png/,
-        filename: "[path].gz",
-        algorithm: "gzip",
-        threshold: 1024,
-        deleteOriginalAssets: false,
-      })
-    );
-  },
+
   devServer: {
-    // port: port,
     open: true,
   },
   chainWebpack: (config) => {
+    // 把依赖分包
     config.optimization.splitChunks({
       chunks: "all",
       cacheGroups: {
@@ -34,8 +25,42 @@ module.exports = {
         },
       },
     });
-    config
-      .plugin("webpack-bundle-analyzer")
-      .use(WebpackBundleAnalyzer.BundleAnalyzerPlugin);
+
+    config.when(process.env.NODE_ENV === "production", (config) => {
+      // 打包分析
+      config
+        .plugin("webpack-bundle-analyzer")
+        .use(WebpackBundleAnalyzer.BundleAnalyzerPlugin);
+
+      // gzip压缩
+      config.plugin("compressionPlugin").use(
+        new CompressionPlugin({
+          test: /\.js$|\.html$|\.css$|\.jpg$|\.jpeg$|\.png/,
+          filename: "[path].gz",
+          algorithm: "gzip",
+          threshold: 1024,
+          deleteOriginalAssets: false,
+        })
+      );
+
+      // uglify代码
+      config.plugin("uglifyPlugin").use(
+        new UglifyPlugin({
+          uglifyOptions: {
+            output: { comments: false },
+            warnings: false,
+            compress: {
+              drop_console: true,
+              drop_debugger: false,
+              pure_funcs: ["console.log"],
+            },
+          },
+        })
+      );
+    });
+
+    config.when(process.env.NODE_ENV === "development", (config) =>
+      config.devtool("source-map")
+    );
   },
 };

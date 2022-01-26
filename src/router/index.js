@@ -41,13 +41,13 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const newUser = to.path.split("/")[1];
   const oldUser = from.path.split("/")[1];
   if (newUser !== oldUser) {
     useridIns.setByPath(to.path);
     const bloggerId = useridIns.getUserId();
-    store.dispatch("initTheme", bloggerId);
+    await store.dispatch("initTheme", bloggerId);
   }
   next();
 });

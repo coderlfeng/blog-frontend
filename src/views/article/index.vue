@@ -1,5 +1,5 @@
 <template>
-  <div class="article-info" :style="{ backgroundImage: `url(${articleBg})` }">
+  <div class="article-info" :style="{ backgroundImage: `url(${$store.getters.mainBg})` }">
     <div class="container">
       <nav-bar
         :avatar="blogInfo.avatar"

@@ -6,9 +6,11 @@
       text-align: center;
       position: absolute;
       bottom: 0;
+      left: 50%;
       padding-bottom: 100px;
-      width: 100%;
+      width: 200px;
       backdrop-filter: blur(2px);
+      transform: translateX(-50%);
       .avatar-container {
         display: flex;
         justify-content: center;
@@ -20,8 +22,11 @@
         }
       }
       .name {
-        padding: 20px 0;
-        font-family: 'Microsoft Yahei', Courier, monospace;
+        font-size: 18px;
+        padding: 15px 0;
+      }
+      .short-desc {
+        font-size: 16px;
       }
     }
     .home-down {
@@ -31,7 +36,19 @@
       display: inline-block;
       width: 35px;
       height: 35px;
-      transform: translateX(-50%);
       cursor: pointer;
+      animation: move 1.4s ease-in-out infinite;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      50% {
+        transform: translateX(-50%) translateY(10px);
+      }
+      100% {
+        transform: translateX(-50%) translateY(-10px);
+      }
     }
   }

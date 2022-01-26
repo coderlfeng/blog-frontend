@@ -2,32 +2,32 @@
   <section class="showcase" :style="bgImg" @mousewheel="handelMousewheel">
     <div class="blogInfo">
       <div class="avatar-container">
-        <img :src="blogInfo.avatar"/>
+        <img :src="blogInfo.avatar" />
       </div>
       <p class="name">{{ blogInfo.name }}</p>
-      <p class="">{{ blogInfo.conciseDesc }}</p>
+      <p class="short-desc">{{ blogInfo.conciseDesc }}</p>
+      <img
+        src="@/assets/images/home-down.png"
+        class="home-down"
+        @click="slideToHome"
+      />
     </div>
-    <img
-      src="@/assets/images/home-down.png"
-      class="home-down"
-      @click="slideToHome"
-    />
   </section>
 </template>
 
 <script>
-import isPC from '@/utils/isPC'
-if(isPC()) {
-  import("./index-PC.less")
-}else {
-  import("./index-mobile.less")
+import isPC from "@/utils/isPC";
+if (isPC()) {
+  import("./index-PC.less");
+} else {
+  import("./index-mobile.less");
 }
 
 import useridInfo from "@/utils/userid";
 import { getBlogInfo } from "@/api/modules/home";
 
 export default {
-  name: 'showcase',
+  name: "showcase",
   data() {
     return {
       bgImg: {
@@ -47,8 +47,8 @@ export default {
     slideToHome() {
       // this.$emit("slideToHome");
       this.$router.push({
-        path: '/lifeng/home'
-      })
+        path: "/lifeng/home",
+      });
     },
     async getBlogInfo() {
       const userid = useridInfo.getUserId();
@@ -56,16 +56,15 @@ export default {
       this.blogInfo = res.data;
     },
     handelMousewheel(e) {
-      if(e.deltaY >= 0) {
+      if (e.deltaY >= 0) {
         this.slideToHome();
-      };
-    }
+      }
+    },
   },
   async created() {
     this.getBlogInfo();
-  }
+  },
 };
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

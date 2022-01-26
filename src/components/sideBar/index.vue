@@ -63,7 +63,7 @@
         <div class="title">最新留言</div>
         <div class="content">别急哦，程序员正在边抓头发边开发中~~~</div>
       </div>
-      <div class="item">
+      <div class="item" v-if="links.length > 0">
         <div class="title">折跃门</div>
         <ul>
           <li
@@ -72,15 +72,23 @@
             class="text-tiny"
             style="text-indent: 10px"
           >
-            <a :href="link.url" target="blank">{{ link.name }}</a>
+            <a :href="link.link" target="blank">{{ link.linkName }}</a>
           </li>
         </ul>
       </div>
-      <div class="item">
+      <div
+        class="item"
+        v-if="
+          connectInfo.qqQrUrl ||
+          connectInfo.wechatQrUrl ||
+          connectInfo.weiboQrUrl
+        "
+      >
         <div class="title">此时一位不愿透露姓名的靓仔留下了他的联系方式</div>
         <div class="contact">
-          <img :src="require('@/assets/images/wechat.png')" />
-          <img :src="require('@/assets/images/wechat.png')" />
+          <img :src="connectInfo.qqQrUrl" v-if="connectInfo.qqQrUrl" />
+          <img :src="connectInfo.wechatQrUrl" v-if="connectInfo.wechatQrUrl" />
+          <img :src="connectInfo.weiboQrUrl" v-if="connectInfo.weiboQrUrl" />
         </div>
       </div>
     </div>
@@ -96,6 +104,8 @@
 
 <script>
 import isPC from "@/utils/isPC";
+import { getLinks } from "@/api/modules/links";
+import { getConnectInfo } from "@/api/modules/connect";
 if (isPC()) {
   import("./index-PC.less");
 } else {
@@ -130,28 +140,8 @@ export default {
       showPoetryIndex: 0,
       articleTagsList: [],
       latestArticles: [],
-      links: [
-        {
-          name: "github",
-          url: "https://github.com",
-        },
-        {
-          name: "vue.js",
-          url: "https://cn.vuejs.org",
-        },
-        {
-          name: "react",
-          url: "https://react.docschina.org/",
-        },
-        {
-          name: "echarts",
-          url: "https://echarts.apache.org/",
-        },
-        {
-          name: "lodash.js",
-          url: "https://www.lodashjs.com/",
-        },
-      ],
+      // 友链
+      links: [],
       colorEnum: [
         { bg: "255, 107, 129, 0.3", color: "#fff" },
         { bg: "123, 237, 159, 0.3", color: "#fff" },
@@ -163,9 +153,25 @@ export default {
       changeTimer: null,
       // 时区
       timeZone: "",
+      connectInfo: {
+        qqQrUrl: null,
+        wechatQrUrl: null,
+        weiboQrUrl: null,
+      },
     };
   },
   methods: {
+    async getFriendLinks() {
+      const bloggerId = useridIns.getUserId();
+      const { data } = await getLinks({ bloggerId });
+      this.links = data;
+    },
+    async getConnectInfo() {
+      const bloggerId = useridIns.getUserId();
+      const { data } = await getConnectInfo({ bloggerId });
+      console.log(data);
+      this.connectInfo = data;
+    },
     loadShici() {
       this.showIt = false;
       shici.load((res) => {
@@ -253,6 +259,8 @@ export default {
     this.getArticleTagsList();
     this.getlatestArticles();
     this.timeZone = formatTimeZone();
+    this.getFriendLinks();
+    this.getConnectInfo();
   },
   mounted() {
     this.loadShici();

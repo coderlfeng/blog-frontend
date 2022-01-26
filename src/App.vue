@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <transition name="slide">
+    <router-view />
+  </transition>
 </template>
 
 <script>
@@ -35,5 +37,33 @@ html {
 #app {
   height: 100vh;
   width: 100vw;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.75s ease-out;
+}
+
+
+.slide-enter-to {
+  position: absolute;
+  right: 0;
+}
+
+
+.slide-enter-from {
+  position: absolute;
+  right: -100%;
+}
+
+
+.slide-leave-to {
+  position: absolute;
+  left: -100%;
+}
+
+
+.slide-leave-from {
+  position: absolute;
+  left: 0;
 }
 </style>

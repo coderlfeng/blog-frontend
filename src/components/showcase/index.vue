@@ -45,10 +45,9 @@ export default {
   },
   methods: {
     slideToHome() {
-      // this.$emit("slideToHome");
-      this.$router.push({
-        path: "/lifeng/home",
-      });
+      const { path } = this.$route;
+      const userText = path.split("/")[1];
+      this.$router.push(`/${userText}/home`);
     },
     async getBlogInfo() {
       const userid = useridInfo.getUserId();

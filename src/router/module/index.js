@@ -1,9 +1,13 @@
+import _ from "lodash";
+
 const routes = [
   {
     path: "showcase",
     name: "showcase",
     component: () =>
-      import(/* webpackChunkName: "showcase" */ "@/components/showcase/index.vue"),
+      import(
+        /* webpackChunkName: "showcase" */ "@/components/showcase/index.vue"
+      ),
   },
   {
     path: "home",
@@ -27,8 +31,12 @@ const routes = [
     path: "allarticle",
     name: "allarticle",
     component: () =>
-      import(/* webpackChunkName: "album" */ "@/views/allArticle/index.vue"),
+      import(/* webpackChunkName: "allArticle" */ "@/views/allArticle/index.vue"),
   },
 ];
 
-module.exports = routes;
+export default (user) => {
+  let dyn_routes = _.cloneDeep(routes);
+  dyn_routes.forEach((route) => (route.name = `${user}_${route.name}`));
+  return dyn_routes;
+};

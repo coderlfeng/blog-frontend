@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import module_routes from "./module/index";
+import dynamicRoutes from "./module/index";
 import useridIns from "@/utils/userid";
 import store from "../store/index";
 
@@ -17,21 +17,21 @@ const routes = [
         name: "lifeng",
         redirect: "lifeng/showcase",
         component: () => import("@/views/layout/index.vue"),
-        children: [...module_routes],
+        children: dynamicRoutes("lifeng"),
       },
       {
         path: "liuhuan",
         name: "liuhuan",
         redirect: "liuhuan/showcase",
         component: () => import("@/views/layout/index.vue"),
-        children: [...module_routes],
+        children: dynamicRoutes("liuhuan"),
       },
       {
         path: "dengyu",
         name: "dengyu",
         redirect: "dengyu/showcase",
         component: () => import("@/views/layout/index.vue"),
-        children: [...module_routes],
+        children: dynamicRoutes("dengyu"),
       },
     ],
   },
@@ -48,6 +48,7 @@ router.beforeEach(async (to, from, next) => {
     useridIns.setByPath(to.path);
     const bloggerId = useridIns.getUserId();
     await store.dispatch("initTheme", bloggerId);
+    oldUser && location.reload();
   }
   next();
 });

@@ -1,6 +1,13 @@
 <template>
   <div class="side-bar" :class="sideBarIsShow ? 'side-bar-show' : ''">
-    <div class="item-list">
+    <div class="controls">
+      <component
+        v-for="controlId in controls"
+        :key="controlId"
+        :is="ID2C(controlId)"
+      />
+    </div>
+    <!-- <div class="item-list">
       <div class="item">
         <div>{{ timeZone }}好~~ 忙碌的打工人,停下来休息一下吧~</div>
         <div class="top">
@@ -17,8 +24,6 @@
             v-if="showIt"
             class="poetry"
             :style="{
-              backgroundColor: `rgba(${colorEnum[showPoetryIndex % 3].bg})`,
-              color: colorEnum[showPoetryIndex % 3].color,
               lineHeight: '30px',
             }"
           >
@@ -31,20 +36,15 @@
       </div>
       <div class="item">
         <div class="title">文章分类</div>
-        <ul class="tags-list">
-          <li
+        <div class="tag-list">
+          <tag
             class="tags"
-            v-for="(tag, index) in articleTagsList"
             :key="tag.tagId"
+            v-for="tag in articleTagsList"
             @click="getTagArticles(tag.tagId)"
-            :style="{
-              backgroundColor: `rgba(${colorEnum[index % 3].bg})`,
-              color: colorEnum[index % 3].color,
-            }"
+            >{{ tag.tagName }}</tag
           >
-            {{ tag.tagName }}
-          </li>
-        </ul>
+        </div>
       </div>
       <div class="item">
         <div class="title">精选文章</div>
@@ -91,21 +91,23 @@
           <img :src="connectInfo.weiboQrUrl" v-if="connectInfo.weiboQrUrl" />
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="btn-close-sidebar" @click="sideBarIsShow = !sideBarIsShow">
+    <!-- <div class="btn-close-sidebar" @click="sideBarIsShow = !sideBarIsShow">
       <i
         class="iconfont"
         :class="sideBarIsShow ? 'icon-dbright' : 'icon-bdleft'"
       ></i>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import ID2C from "@/constants/side-components";
 import isPC from "@/utils/isPC";
 import { getLinks } from "@/api/modules/links";
 import { getConnectInfo } from "@/api/modules/connect";
+import tag from "@/components/articleTag/index";
 if (isPC()) {
   import("./index-PC.less");
 } else {
@@ -118,9 +120,26 @@ import useridIns from "@/utils/userid";
 import { normalizeDate } from "@/utils/time";
 import calendar from "@/utils/calendar";
 import { formatTimeZone } from "@/utils/time";
+import articleType from "@/components/cards/articleType/index.vue";
+import articleHot from "@/components/cards/articleHot/index.vue";
+import links from "@/components/cards/links/index.vue";
+import connect from "@/components/cards/connect/index.vue"
+import timeControl from "@/components/cards/timeControl/index.vue"
+import message from "@/components/cards/message/index.vue"
+import introduce from "@/components/cards/introduce/index.vue"
 const shici = require("jinrishici");
 
 export default {
+  components: {
+    tag,
+    articleType,
+    articleHot,
+    links,
+    connect,
+    timeControl,
+    message,
+    introduce
+  },
   data() {
     return {
       date: {
@@ -137,27 +156,26 @@ export default {
         dynasty: "",
         title: "",
       },
-      showPoetryIndex: 0,
       articleTagsList: [],
+      // 精选文章
       latestArticles: [],
       // 友链
       links: [],
-      colorEnum: [
-        { bg: "255, 107, 129, 0.3", color: "#fff" },
-        { bg: "123, 237, 159, 0.3", color: "#fff" },
-        { bg: "83, 82, 237, 0.3", color: "#fff" },
-      ],
       showIt: true,
       sideBarIsShow: false,
       getDateTimer: null,
       changeTimer: null,
       // 时区
       timeZone: "",
+      // 联系方式
       connectInfo: {
         qqQrUrl: null,
         wechatQrUrl: null,
         weiboQrUrl: null,
       },
+      // 控件id
+      controls: [1, 2, 3, 4, 5, 7],
+      ID2C: ID2C,
     };
   },
   methods: {
@@ -169,7 +187,6 @@ export default {
     async getConnectInfo() {
       const bloggerId = useridIns.getUserId();
       const { data } = await getConnectInfo({ bloggerId });
-      console.log(data);
       this.connectInfo = data;
     },
     loadShici() {
@@ -242,7 +259,13 @@ export default {
       this.latestArticles = res.data.records;
     },
     getTagArticles(id) {
-      this.$EventBus.$emit("getTagArticles", id);
+      const user = useridIns.getUser();
+      this.$router.push({
+        path: `/${user}/allarticle`,
+        query: {
+          tag: id,
+        },
+      });
     },
     goToDetail(id) {
       this.$router.push({
@@ -252,7 +275,6 @@ export default {
         },
       });
     },
-    showSideBar() {},
   },
   created() {
     this.getDate();
@@ -263,7 +285,7 @@ export default {
     this.getConnectInfo();
   },
   mounted() {
-    this.loadShici();
+    // this.loadShici();
     document.querySelector(".home").addEventListener("scroll", () => {
       this.sideBarIsShow = false;
     });

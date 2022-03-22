@@ -1,61 +1,66 @@
 .home {
-	height: 100%;
-	overflow-y: scroll;
-	background: url("../../assets/images/bg1.jpg") no-repeat;
-	background-size: cover;
-	background-position: center;
+  height: 100%;
+  overflow-y: scroll;
+  background: url("../../assets/images/bg1.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
 
-	.home-container{
-		margin: 0 auto;
-		width: 1200px;
-	}
+  .home-container {
+    margin: 0 auto;
+    width: 1200px;
+    min-height: calc(100vh - 200px);
+  }
 
-    .home-main{
-		display: flex;
-        padding: 20px 0;
+  .home-main {
+    display: flex;
+    padding: 20px 0;
 
-		.home-main-right{
-			width: 70%;
-		}
+    .home-main-right {
+      width: 70%;
+    }
+  }
+
+  .toTop {
+    position: fixed;
+    bottom: 100px;
+    transform: translateY(-90vh);
+    right: 40px;
+    width: 80px;
+    cursor: pointer;
+    z-index: 9999;
+    transition: all 0.5s;
+
+    .line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      width: 1px;
+      height: 90vh;
+      border: 1px solid #ccc;
+      z-index: 99;
     }
 
-	.toTop{
-		position: fixed;
-		bottom: 100px;
-		transform: translateY(-90vh);
-		right: 40px;
-		width: 80px;
-		cursor: pointer;
-		z-index: 9999;
-		transition: all .5s;
+    .text {
+      display: none;
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #fff;
+    }
 
-		.line{
-			position: absolute;
-			top: 0;
-			left: 50%;
-			transform: translateX(-50%) translateY(-100%);
-			width: 1px;
-			height: 90vh;
-			border: 1px solid #ccc;
-			z-index: 99;
-		}
+    &:hover .text {
+      display: block;
+    }
+  }
 
-		.text{
-			display: none;
-			position: absolute;
-			top: 52%;
-			left: 50%;
-			transform: translateX(-50%);
-			font-size: 12px;
-			color: #fff;
-		}
-
-		&:hover .text{
-			display: block;
-		}
-	}
-
-	.toTop-show{
-		transform: translateY(0vh);
-	}
+  .toTop-show {
+    transform: translateY(0vh);
+  }
+  // .all-footer {
+  //   position: sticky;
+  //   bottom: 0;
+  // }
 }

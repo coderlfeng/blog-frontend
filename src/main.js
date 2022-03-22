@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import messagePlugin from '@/components/message/register'
+import "@/utils/io"
 
 Vue.config.productionTip = false
 Vue.use(messagePlugin)

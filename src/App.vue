@@ -10,6 +10,12 @@ export default {
   components: {
     home,
   },
+  sockets: {
+    io_token(token) {
+      // console.log("接收到当前socketid", token);
+      sessionStorage.setItem("io_token", token)
+    },
+  },
   created() {
     //在页面刷新时将vuex里的信息保存到localStorage里
     window.addEventListener("beforeunload", () => {
@@ -43,24 +49,20 @@ html {
   transition: all 0.75s ease-out;
 }
 
-
 .slide-enter-to {
   position: absolute;
   right: 0;
 }
-
 
 .slide-enter-from {
   position: absolute;
   right: -100%;
 }
 
-
 .slide-leave-to {
   position: absolute;
   left: -100%;
 }
-
 
 .slide-leave-from {
   position: absolute;

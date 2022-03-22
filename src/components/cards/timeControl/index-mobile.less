@@ -1,0 +1,46 @@
+.time-control {
+  display: flex;
+  flex-direction: column;
+  .time-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 600;
+    .time-solar {
+      flex: 1;
+      white-space: pre-wrap;
+    }
+    .time-lunar {
+      flex: 1;
+      white-space: pre-wrap;
+      text-align: right;
+    }
+  }
+  .time-weather {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+    font-size: 12px;
+    align-items: center;
+    line-height: 24px;
+    .time-tips {
+      flex: 1;
+      margin-left: 15px;
+      .time-zone {
+      }
+      .weather {
+      }
+      .tips {
+      }
+    }
+  }
+  .hour {
+    padding: 0!important;
+    i {
+      font-style: 12px;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="footer-container">
     <p class="footer-desc">
-      {{ new Date().getFullYear() }} &copy; EXCELLENTLLD ==== share and enjoy
+      {{ new Date().getFullYear() }} &copy; EXCELLENTLLD
     </p>
     <p class="footer-filing">蜀ICP备2021028558号</p>
     <p class="footer-notice">本站原创内容转载请注明来源</p>

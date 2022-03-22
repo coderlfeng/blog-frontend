@@ -1,11 +1,14 @@
 <template>
-  <div class="article-info" :style="{ backgroundImage: `url(${$store.getters.mainBg})` }">
+  <div
+    class="article-info"
+    :style="{ backgroundImage: `url(${$store.getters.mainBg})` }"
+  >
+    <nav-bar
+      :avatar="blogInfo.avatar"
+      :concise-desc="blogInfo.conciseDesc"
+      ref="navbar"
+    />
     <div class="container">
-      <nav-bar
-        :avatar="blogInfo.avatar"
-        :concise-desc="blogInfo.conciseDesc"
-        ref="navbar"
-      />
       <div class="main" ref="articleMain">
         <div class="article-title">
           <p class="title">

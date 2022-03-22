@@ -7,6 +7,29 @@ module.exports = {
 
   devServer: {
     open: true,
+    proxy: {
+      "/map": {
+        target: "https://api.map.baidu.com/reverse_geocoding/v3",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/map": "",
+        },
+      },
+      "/weather": {
+        target: "http://t.weather.itboy.net",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/weather": "",
+        },
+      },
+      "/city": {
+        target: "https://ip.ws.126.net",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/city": "",
+        },
+      },
+    },
   },
   chainWebpack: (config) => {
     // 把依赖分包

@@ -3,22 +3,20 @@
     class="home"
     ref="home"
     :style="{ backgroundImage: `url(${$store.getters.mainBg})` }"
-    @click="hideMenu"
   >
     <nav-bar
       :avatar="blogInfo.avatar"
       :concise-desc="blogInfo.conciseDesc"
       ref="navbar"
     />
-    <div class="home-container" ref="container" @scroll="hideMenu">
-      <introduction />
+    <div class="home-container" ref="container">
+      <!-- <introduction /> -->
       <div class="home-main">
         <div class="home-main-right">
           <div class="title-article">最新文章</div>
           <articleList :showPage="false" :scrollBox="'home-container'" />
-          <div class="title-album">精美图集</div>
-          <!-- <album /> -->
-          <album2 />
+          <!-- <div class="title-album">精美图集</div>
+          <album2 /> -->
         </div>
         <sideBar />
       </div>
@@ -77,27 +75,25 @@ export default {
       background: null,
     };
   },
+  sockets: {
+    greet(name) {
+      console.log(`你好,${name},egg已接受到你的消息`);
+    },
+    res(str) {
+      console.log(str);
+    },
+  },
   created() {
     this.getBlogInfo();
+    const userid = useridIns.getUserId();
+    let user = userid === 1 ? "李沣" : userid === 2 ? "刘欢" : "邓宇";
+    this.$socket.emit("chat", { name: user });
   },
   methods: {
     async getBlogInfo() {
       const userid = useridIns.getUserId();
       const res = await getBlogInfo({ id: userid });
       this.blogInfo = res.data;
-    },
-    hideMenu() {
-      this.$refs.navbar && this.$refs.navbar.hideMenu();
-      if (this.$refs.home.scrollTop > 400) {
-        this.showToTop = true;
-      } else {
-        this.showToTop = false;
-      }
-      const container = this.$refs.container;
-      console.log(container);
-      this.showFooter =
-        container.scrollHeight - container.scrollTop <
-        container.offsetHeight + 200;
     },
     // 回到顶部
     toTop() {

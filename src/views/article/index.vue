@@ -11,16 +11,27 @@
     <div class="container">
       <div class="main" ref="articleMain">
         <div class="article-title">
-          <p class="title">
-            {{ article.title }}
-          </p>
+          <h3>
+            <p class="title">
+              <em>{{ article.title }}</em>
+            </p>
+          </h3>
           <p class="subtitle">
             {{ article.subTitle }}
           </p>
-          <p class="updateTime">Update： {{ article.updateTime }}</p>
+          <p class="updateTime">更新于： {{ article.updateTime }}</p>
         </div>
-        <div v-html="article.content" class="content"></div>
-        <ul class="article-tags">
+        <!-- <div v-html="article.content" class="content"></div> -->
+        <mavon-editor
+          :editable="false"
+          :toolbarsFlag="false"
+          :subfield="false"
+          :boxShadow="false"
+          previewBackground="#f5f5d5"
+          defaultOpen="preview"
+          v-model="article.content"
+        />
+        <!-- <ul class="article-tags">
           <li
             v-for="(tag, index) in article.tags"
             :key="tag.tagId"
@@ -32,7 +43,18 @@
           >
             {{ tag.tagName }}
           </li>
-        </ul>
+        </ul> -->
+        <div class="tag-list-box">
+          <div class="tag-list-title">分类</div>
+          <div class="tag-list-container">
+            <a
+              href="javascript:;"
+              v-for="tag in article.tags"
+              :key="tag.tagId"
+              >{{ tag.tagName }}</a
+            >
+          </div>
+        </div>
       </div>
       <footBar />
     </div>
@@ -113,4 +135,19 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less">
+.hljs {
+  background-color: #f6f8fa !important;
+}
+.markdown-body {
+  border: none !important;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    border: none !important;
+  }
+}
+</style>

@@ -13,7 +13,7 @@ export default {
   sockets: {
     io_token(token) {
       // console.log("接收到当前socketid", token);
-      sessionStorage.setItem("io_token", token)
+      sessionStorage.setItem("io_token", token);
     },
   },
   created() {
@@ -43,6 +43,9 @@ html {
 #app {
   height: 100vh;
   width: 100vw;
+}
+canvas {
+  z-index: 1000;
 }
 .slide-enter-active,
 .slide-leave-active {

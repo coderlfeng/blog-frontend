@@ -48,4 +48,33 @@ const formatTimeZone = () => {
   }
 };
 
-export { format, normalizeDate, formatTimeZone };
+const publishFormTime = (time) => {
+  /**
+   * 规则:
+   * 1分钟内 => 刚刚
+   * 1小时内 => xx分钟前
+   * 24小时内 => xx小时前
+   * 30天内 => xx天前
+   * 30天 ~ 30*12天 => xx个月前
+   * > 30*12天 => xx年前
+   */
+  const timestamp = +new Date() - time;
+  if (timestamp < 60 * 1000) {
+    return "刚刚";
+  }
+  if (timestamp < 60 * 60 * 1000) {
+    return `${Math.floor(timestamp / 1000 / 60)}分钟前`;
+  }
+  if (timestamp < 1000 * 60 * 60 * 24) {
+    return `${Math.floor(timestamp / 1000 / 60 / 60)}小时前`;
+  }
+  if (timestamp < 1000 * 60 * 60 * 24 * 30) {
+    return `${Math.floor(timestamp / 1000 / 60 / 60 / 24)}天前`;
+  }
+  if (timestamp < 1000 * 60 * 60 * 24 * 30 * 12) {
+    return `${Math.floor(timestamp / 1000 / 60 / 60 / 24 / 30)}个月前`;
+  }
+  return `${Math.floor(timestamp / 1000 / 60 / 60 / 24 / 30 / 12)}年前`;
+};
+
+export { format, normalizeDate, formatTimeZone, publishFormTime };

@@ -16,6 +16,7 @@
     "headroom.js": "^0.12.0",
     "jinrishici": "^1.0.6",
     "lodash": "^4.17.21",
+    "mavon-editor": "^2.10.4",
     "postcss": "7",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue": "^2.6.14",

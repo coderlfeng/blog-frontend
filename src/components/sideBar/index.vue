@@ -7,98 +7,6 @@
         :is="ID2C(controlId)"
       />
     </div>
-    <!-- <div class="item-list">
-      <div class="item">
-        <div>{{ timeZone }}好~~ 忙碌的打工人,停下来休息一下吧~</div>
-        <div class="top">
-          <div class="text">
-            <div>
-              现在是 <span class="">{{ date.solarDate }}</span>
-            </div>
-            <p>农历 {{ date.lunarDate }} {{ date.Term }}</p>
-            <p>{{ date.festival }} {{ date.lunarFestival }}</p>
-          </div>
-        </div>
-        <transition name="fade">
-          <div
-            v-if="showIt"
-            class="poetry"
-            :style="{
-              lineHeight: '30px',
-            }"
-          >
-            <p>{{ poetry.content }}</p>
-            <p class="poetry-author">
-              -- {{ `${poetry.author} · 《${poetry.title}》` }}
-            </p>
-          </div>
-        </transition>
-      </div>
-      <div class="item">
-        <div class="title">文章分类</div>
-        <div class="tag-list">
-          <tag
-            class="tags"
-            :key="tag.tagId"
-            v-for="tag in articleTagsList"
-            @click="getTagArticles(tag.tagId)"
-            >{{ tag.tagName }}</tag
-          >
-        </div>
-      </div>
-      <div class="item">
-        <div class="title">精选文章</div>
-        <ul>
-          <li
-            class="latest-article-item"
-            v-for="(article, index) in latestArticles"
-            :key="article.article_id"
-            @click="goToDetail(article.article_id)"
-          >
-            {{ index + 1 + "、" + article.title }}
-          </li>
-        </ul>
-      </div>
-      <div class="item">
-        <div class="title">最新留言</div>
-        <div class="content">别急哦，程序员正在边抓头发边开发中~~~</div>
-      </div>
-      <div class="item" v-if="links.length > 0">
-        <div class="title">折跃门</div>
-        <ul>
-          <li
-            v-for="(link, i) in links"
-            :key="i"
-            class="text-tiny"
-            style="text-indent: 10px"
-          >
-            <a :href="link.link" target="blank">{{ link.linkName }}</a>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="item"
-        v-if="
-          connectInfo.qqQrUrl ||
-          connectInfo.wechatQrUrl ||
-          connectInfo.weiboQrUrl
-        "
-      >
-        <div class="title">此时一位不愿透露姓名的靓仔留下了他的联系方式</div>
-        <div class="contact">
-          <img :src="connectInfo.qqQrUrl" v-if="connectInfo.qqQrUrl" />
-          <img :src="connectInfo.wechatQrUrl" v-if="connectInfo.wechatQrUrl" />
-          <img :src="connectInfo.weiboQrUrl" v-if="connectInfo.weiboQrUrl" />
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div class="btn-close-sidebar" @click="sideBarIsShow = !sideBarIsShow">
-      <i
-        class="iconfont"
-        :class="sideBarIsShow ? 'icon-dbright' : 'icon-bdleft'"
-      ></i>
-    </div> -->
   </div>
 </template>
 
@@ -123,10 +31,10 @@ import { formatTimeZone } from "@/utils/time";
 import articleType from "@/components/cards/articleType/index.vue";
 import articleHot from "@/components/cards/articleHot/index.vue";
 import links from "@/components/cards/links/index.vue";
-import connect from "@/components/cards/connect/index.vue"
-import timeControl from "@/components/cards/timeControl/index.vue"
-import message from "@/components/cards/message/index.vue"
-import introduce from "@/components/cards/introduce/index.vue"
+import connect from "@/components/cards/connect/index.vue";
+import timeControl from "@/components/cards/timeControl/index.vue";
+import message from "@/components/cards/message/index.vue";
+import introduce from "@/components/cards/introduce/index.vue";
 const shici = require("jinrishici");
 
 export default {
@@ -138,7 +46,7 @@ export default {
     connect,
     timeControl,
     message,
-    introduce
+    introduce,
   },
   data() {
     return {
@@ -174,7 +82,7 @@ export default {
         weiboQrUrl: null,
       },
       // 控件id
-      controls: [1, 2, 3, 4, 5, 7],
+      controls: [1, 3, 4, 7],
       ID2C: ID2C,
     };
   },

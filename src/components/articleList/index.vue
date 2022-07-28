@@ -10,9 +10,6 @@
         @mouseleave="article.isActive = false"
         @click="goToDetail(article.article_id)"
       >
-        <div class="left-side">
-          <img :src="article.coverUrl" referrerpolicy="no-referrer" />
-        </div>
         <div class="right-side">
           <p class="article-title">
             {{ article.title }}
@@ -30,7 +27,7 @@
             >
               {{ article.tags[0] ? article.tags[0].tagName : "" }}
             </li>
-            <li class="article-tag-more" v-if="article.tags.length > 1">
+            <li class="article-tag-more" v-if="article.tags.length > 3">
               <span>+{{ article.tags.length - 1 }}</span>
             </li>
           </ul>
@@ -48,8 +45,16 @@
             </li>
           </ul>
           <div class="article-item-info">
-            <span class="">更新于：{{ article.updateTime | formatTime }}</span>
+            <span class="">更新于：{{ article.updateTime }}</span>
           </div>
+        </div>
+        <div class="left-side">
+          <img
+            src="https://gd-hbimg.huaban.com/5c937b68966324ba0df2f095718178548e0e022e9cd60-pfwRKF_fw658/format/webp"
+            :data-src="article.coverUrl"
+            class="article-list-img"
+            referrerpolicy="no-referrer"
+          />
         </div>
       </li>
     </ul>
@@ -65,6 +70,7 @@
 </template>
 
 <script>
+import { publishFormTime } from "@/utils/time";
 import isPC from "@/utils/isPC";
 if (isPC()) {
   import("./index-PC.less");
@@ -92,7 +98,7 @@ export default {
       ],
       isPC: true,
       showNum: 0,
-      observer: null
+      observer: null,
     };
   },
   components: {
@@ -106,8 +112,8 @@ export default {
       type: Boolean,
     },
     tag: {
-      type: [Number, String]
-    }
+      type: [Number, String],
+    },
   },
   filters: {
     formatTime(val) {
@@ -122,6 +128,25 @@ export default {
     });
   },
   methods: {
+    createLazyLoadImgObserver() {
+      const observer = new IntersectionObserver((entries, observe) => {
+        console.log("entries", entries);
+        entries.forEach((item) => {
+          // 获取当前正在观察的元素
+          let target = item.target;
+          if (item.isIntersecting && target.dataset.src) {
+            target.src = target.dataset.src; // 删除data-src属性
+            target.removeAttribute("data-src"); // 取消观察
+            observe.unobserve(item.target);
+          }
+        });
+      });
+      const imgs = document.querySelectorAll(".article-list-img");
+      console.log("imgs", imgs);
+      imgs.forEach((img) => {
+        observer.observe(img);
+      });
+    },
     createObserver() {
       const { $refs } = this;
       const options = {
@@ -153,10 +178,14 @@ export default {
         sortType: 1,
         tagId: this.tag,
       });
+      res.data.records.forEach((article) => {
+        article.updateTime = publishFormTime(article.updateTime);
+      });
       this.articles = res.data.records;
       this.total = res.data.total;
       this.$nextTick(() => {
         this.createObserver();
+        this.createLazyLoadImgObserver();
       });
     },
 

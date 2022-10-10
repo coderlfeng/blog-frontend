@@ -3,7 +3,7 @@
     <p class="footer-desc">
       {{ new Date().getFullYear() }} &copy; EXCELLENTLLD
     </p>
-    <p class="footer-filing">蜀ICP备2021028558号</p>
+    <p class="footer-filing" @click="goIPC">蜀ICP备2021028558号</p>
     <p class="footer-notice">本站原创内容转载请注明来源</p>
     <p class="footer-run-time">本站已运行{{ time }}</p>
   </div>
@@ -39,6 +39,9 @@ export default {
       let seconds = Math.floor((leavel2 / 1000) % 60);
       this.time = `${days}天${hours}小时${minutes}分钟${seconds}秒`;
     },
+    goIPC() {
+      location.href = 'https://beian.miit.gov.cn/#/Integrated/recordQuery'
+    }
   },
   destroyed() {
     this.computeTimer = null;

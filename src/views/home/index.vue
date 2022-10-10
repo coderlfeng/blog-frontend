@@ -71,7 +71,7 @@ export default {
       blogInfo: {},
       showToTop: false,
       toTopTimer: null,
-      showFooter: false,
+      showFooter: true,
       background: null,
     };
   },
